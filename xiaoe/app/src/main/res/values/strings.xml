@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">xiaoe</string>
+    <string name="keshijiaohu">可视交互</string>
+    <string name="keshijiaohu_describe">查看设备LED屏幕显示开关调节至1档位</string>
+    <string name="daqiya">大气压</string>
+    <string name="daqiya_describe">查看大气压和海拔开关调节至2档位</string>
+    <string name="duocaidengguang">多彩灯光</string>
+    <string name="duocaidengguang_describe">控制设备灯光颜色开关调节至3档位</string>
+    <string name="yuyinkongzhi">语音控制</string>
+    <string name="yuyinkongzhi_describe">通过APP向设备发送语音指令</string>
+    <string name="yuyinliuyan">语音留言</string>
+    <string name="yuyinliuyan_describe">通过APP向设备发送语音留言</string>
+    <string name="qunzuguanli">群组管理</string>
+    <string name="qunzuguanli_describe">添加和管理多个设备</string>
+    <string name="shujutouchuan">数据透传</string>
+    <string name="shujutouchuan_describe">通过APP向设备发数据请用透传板体验此功能</string>
+
+</resources>

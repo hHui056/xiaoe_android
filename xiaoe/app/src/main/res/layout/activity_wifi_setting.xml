@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.beidouapp.xiaoe.activity.WifiSettingActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="18.75"
+        android:background="@color/title_background"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true">
+
+        <com.beidouapp.xiaoe.view.MyTitle
+            android:id="@+id/title_wifi_setting"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+        </com.beidouapp.xiaoe.view.MyTitle>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/title_wifi_setting"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/wifi_logo" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="47.12"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="280dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/input_background"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/edit_ssid"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:editable="false"
+                android:paddingLeft="18dp"
+                android:text="Android-AP"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp">
+
+                <EditText
+                    android:id="@+id/edit_passwrod"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:background="@android:color/transparent"
+                    android:hint="网络密码"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/img_eyes"
+                    android:layout_width="0dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.8"
+                    android:background="@drawable/eyes" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_setting_wifi"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"
+            android:background="@drawable/start_setting"
+            android:text="开始配置"
+            android:textColor="@color/title_background" />
+    </RelativeLayout>
+</LinearLayout>
