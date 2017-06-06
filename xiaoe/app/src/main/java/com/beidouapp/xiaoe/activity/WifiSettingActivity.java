@@ -15,6 +15,8 @@ import butterknife.OnClick;
 
 /**
  * @author hHui
+ *         <p>
+ *         wifi配置
  */
 
 public class WifiSettingActivity extends BaseActivity {

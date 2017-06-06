@@ -36,7 +36,9 @@ import java.util.Vector;
 /**
  * Initial the camera
  *
- * @author allen
+ * @author hHui
+ *         <p>
+ *         扫描二维码
  */
 public class CaptureActivity extends BaseActivity implements Callback {
 

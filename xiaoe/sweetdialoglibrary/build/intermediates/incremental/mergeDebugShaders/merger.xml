@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="F:\ASProject\xiaoe\sweetdialoglibrary\src\main\shaders"/></dataSet><dataSet config="debug"><source path="F:\ASProject\xiaoe\sweetdialoglibrary\src\debug\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="F:\xiaoe_android\xiaoe\sweetdialoglibrary\src\main\shaders"/></dataSet><dataSet config="debug"><source path="F:\xiaoe_android\xiaoe\sweetdialoglibrary\src\debug\shaders"/></dataSet></merger>

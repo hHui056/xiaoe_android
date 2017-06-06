@@ -1,50 +1,50 @@
 [
     {
-        "merged": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\error_x_in.xml",
-        "source": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\error_x_in.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_in_bottom.xml",
+        "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\anim\\abc_slide_in_bottom.xml"
     },
     {
-        "merged": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\modal_in.xml",
-        "source": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\modal_in.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\success_mask_layout.xml",
+        "source": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\success_mask_layout.xml"
     },
     {
-        "merged": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_out_bottom.xml",
-        "source": "C:\\Users\\Admin\\.android\\build-cache\\5a4cf77665dddf99fc6b82b5053d4925fcd9e986\\output\\res\\anim\\abc_slide_out_bottom.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\modal_in.xml",
+        "source": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\modal_in.xml"
     },
     {
-        "merged": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\modal_out.xml",
-        "source": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\modal_out.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_out_top.xml",
+        "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\anim\\abc_slide_out_top.xml"
     },
     {
-        "merged": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\success_mask_layout.xml",
-        "source": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\success_mask_layout.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\error_frame_in.xml",
+        "source": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\error_frame_in.xml"
     },
     {
-        "merged": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_in_top.xml",
-        "source": "C:\\Users\\Admin\\.android\\build-cache\\5a4cf77665dddf99fc6b82b5053d4925fcd9e986\\output\\res\\anim\\abc_slide_in_top.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\anim\\abc_slide_out_bottom.xml"
     },
     {
-        "merged": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_fade_in.xml",
-        "source": "C:\\Users\\Admin\\.android\\build-cache\\5a4cf77665dddf99fc6b82b5053d4925fcd9e986\\output\\res\\anim\\abc_fade_in.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\success_bow_roate.xml",
+        "source": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\success_bow_roate.xml"
     },
     {
-        "merged": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_out_top.xml",
-        "source": "C:\\Users\\Admin\\.android\\build-cache\\5a4cf77665dddf99fc6b82b5053d4925fcd9e986\\output\\res\\anim\\abc_slide_out_top.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\modal_out.xml",
+        "source": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\modal_out.xml"
     },
     {
-        "merged": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\success_bow_roate.xml",
-        "source": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\success_bow_roate.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\error_x_in.xml",
+        "source": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\error_x_in.xml"
     },
     {
-        "merged": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_in_bottom.xml",
-        "source": "C:\\Users\\Admin\\.android\\build-cache\\5a4cf77665dddf99fc6b82b5053d4925fcd9e986\\output\\res\\anim\\abc_slide_in_bottom.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_slide_in_top.xml",
+        "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\anim\\abc_slide_in_top.xml"
     },
     {
-        "merged": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_fade_out.xml",
-        "source": "C:\\Users\\Admin\\.android\\build-cache\\5a4cf77665dddf99fc6b82b5053d4925fcd9e986\\output\\res\\anim\\abc_fade_out.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_fade_in.xml",
+        "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\anim\\abc_fade_in.xml"
     },
     {
-        "merged": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\error_frame_in.xml",
-        "source": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\anim\\error_frame_in.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\abc_fade_out.xml",
+        "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\anim\\abc_fade_out.xml"
     }
 ]

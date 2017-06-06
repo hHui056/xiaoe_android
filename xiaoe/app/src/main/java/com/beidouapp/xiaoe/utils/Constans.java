@@ -1,5 +1,7 @@
 package com.beidouapp.xiaoe.utils;
 
+import android.graphics.Color;
+
 /**
  * Created by hHui on 2017/6/1.
  */
@@ -42,6 +44,12 @@ public class Constans {
      */
     public static final String DEVICE_STATE_KEY = "device_state_key";
     public static final String ILINK_MSG_KEY = "ilink_msg_key";
+    public static final int[] LIGHT_COLORS = {
+            Color.rgb(230, 29, 190), Color.rgb(250, 40, 11), Color.rgb(255, 126, 0),
+            Color.rgb(255, 195, 13), Color.rgb(254, 255, 51), Color.rgb(200, 253, 58),
+            Color.rgb(114, 244, 36), Color.rgb(0, 209, 103), Color.rgb(2, 198, 227),
+            Color.rgb(5, 118, 247), Color.rgb(65, 0, 251), Color.rgb(150, 0, 255)
+    };
 
     /**
      * 常用key
@@ -53,6 +61,5 @@ public class Constans {
         public static final String SCAN_APPKEY = "scan_appkey";
         public static final String SCAN_UID = "scan_uid";
     }
-
 
 }

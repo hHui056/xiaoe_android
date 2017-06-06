@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 读取网络状态 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--相机权限-->
+    <!-- 相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
@@ -38,8 +38,11 @@
 
         <service android:name=".service.IMService" />
 
-        <activity android:name=".activity.QRSuccessActivity"></activity>
-        <activity android:name=".activity.CaptureActivity"></activity>
+        <activity android:name=".activity.QRSuccessActivity" />
+        <activity android:name=".activity.CaptureActivity" />
+        <activity
+            android:name=".activity.RGBControllerActivity"
+            android:theme="@style/transcutestyle"></activity>
     </application>
 
 </manifest>

@@ -24,6 +24,7 @@ import com.beidouapp.et.Message;
 import com.beidouapp.et.StatusListener;
 import com.beidouapp.xiaoe.activity.BaseActivity;
 import com.beidouapp.xiaoe.activity.CaptureActivity;
+import com.beidouapp.xiaoe.activity.RGBControllerActivity;
 import com.beidouapp.xiaoe.activity.WifiSettingActivity;
 import com.beidouapp.xiaoe.instruction.AirReqBody;
 import com.beidouapp.xiaoe.instruction.AirResBody;
@@ -69,6 +70,10 @@ public class MainActivity extends BaseActivity {
     Toast toast;
     Intent intentService;
     MyBroadcastReceiver rec;
+    /**
+     * 是否处理错误消息
+     */
+    boolean isShowErrorMessage = true;
     /**
      * 设备是否在线
      */
@@ -184,7 +189,7 @@ public class MainActivity extends BaseActivity {
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
             case R.id.img_device:
-                startActivity(new Intent(MainActivity.this,CaptureActivity.class));
+                startActivity(new Intent(MainActivity.this, CaptureActivity.class));
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
             case R.id.opt_wenshidu:
@@ -203,7 +208,8 @@ public class MainActivity extends BaseActivity {
                 showToast("可视交互");
                 break;
             case R.id.opt_duocaidengguang:
-                showToast("多彩灯光");
+                isShowErrorMessage = false;
+                startActivity(new Intent(MainActivity.this, RGBControllerActivity.class));
                 break;
             case R.id.opt_yuyinliuyan:
                 showToast("语音留言");
@@ -387,6 +393,7 @@ public class MainActivity extends BaseActivity {
         if (isConnectServer) {
             getDeviceStates();
         }
+        isShowErrorMessage = true;
     }
 
     void showLog(String log) {
@@ -422,7 +429,9 @@ public class MainActivity extends BaseActivity {
             } else if (action.equals(Constans.CMD_WRONG)) {
                 TempQureyType = QureyType.QUREYEND;
                 AirQureyType = QureyType.QUREYEND;
-                showErrorMessage("请确认档位和跳线帽都正确后再试");
+                if (isShowErrorMessage) {
+                    showErrorMessage("请确认档位和跳线帽都正确后再试");
+                }
             } else if (action.equals(Constans.LOST_CONNECT)) {//失去连接
 
             } else if (action.equals(Constans.DEVICE_STATE_CHANGE)) {//设备状态改变

@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "F:\\ASProject\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
+        "outputFile": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-sw600dp-v13\\values-sw600dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 120
                 },
                 "from": {
-                    "file": "C:\\Users\\Admin\\.android\\build-cache\\5a4cf77665dddf99fc6b82b5053d4925fcd9e986\\output\\res\\values-sw600dp\\values.xml",
+                    "file": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\values-sw600dp\\values.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -30,7 +30,7 @@
                     "endOffset": 190
                 },
                 "from": {
-                    "file": "C:\\Users\\Admin\\.android\\build-cache\\5a4cf77665dddf99fc6b82b5053d4925fcd9e986\\output\\res\\values-sw600dp\\values.xml",
+                    "file": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\values-sw600dp\\values.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -49,7 +49,7 @@
                     "endOffset": 249
                 },
                 "from": {
-                    "file": "C:\\Users\\Admin\\.android\\build-cache\\5a4cf77665dddf99fc6b82b5053d4925fcd9e986\\output\\res\\values-sw600dp\\values.xml",
+                    "file": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\values-sw600dp\\values.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -68,7 +68,7 @@
                     "endOffset": 320
                 },
                 "from": {
-                    "file": "C:\\Users\\Admin\\.android\\build-cache\\5a4cf77665dddf99fc6b82b5053d4925fcd9e986\\output\\res\\values-sw600dp\\values.xml",
+                    "file": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\values-sw600dp\\values.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -87,7 +87,7 @@
                     "endOffset": 388
                 },
                 "from": {
-                    "file": "C:\\Users\\Admin\\.android\\build-cache\\5a4cf77665dddf99fc6b82b5053d4925fcd9e986\\output\\res\\values-sw600dp\\values.xml",
+                    "file": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\values-sw600dp\\values.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -106,7 +106,7 @@
                     "endOffset": 443
                 },
                 "from": {
-                    "file": "C:\\Users\\Admin\\.android\\build-cache\\5a4cf77665dddf99fc6b82b5053d4925fcd9e986\\output\\res\\values-sw600dp\\values.xml",
+                    "file": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\values-sw600dp\\values.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,

@@ -14,6 +14,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 绑定设备
+ */
 public class QRSuccessActivity extends BaseActivity {
 
     @BindView(R.id.img_qr_back)
@@ -38,7 +41,6 @@ public class QRSuccessActivity extends BaseActivity {
 
         txtQrAppkey.setText(appkey);
         txtQrUid.setText(uid);
-
     }
 
     @OnClick({R.id.img_qr_back, R.id.btn_qr_bind_device})

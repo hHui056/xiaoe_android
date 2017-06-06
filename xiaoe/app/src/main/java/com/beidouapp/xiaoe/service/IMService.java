@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
@@ -22,16 +23,53 @@ import com.beidouapp.et.Server;
 import com.beidouapp.et.client.domain.DocumentInfo;
 import com.beidouapp.xiaoe.instruction.Instruction;
 import com.beidouapp.xiaoe.instruction.InstructionParser;
+import com.beidouapp.xiaoe.utils.ConnectType;
 import com.beidouapp.xiaoe.utils.Constans;
 import com.beidouapp.xiaoe.utils.TestUtil;
 
 
 public class IMService extends Service {
-    public static final String TAG = "IMService ";
+    public static final String TAG = "IMService";
+
+    public static final int COUNT_DOWN = 0;//倒计时
+
+    public static final int RECONNECT = 1;//重连
+
     public ISDKContext sdkContext;
+    /**
+     * 重连计时  120s内未自动重连成功，则手动重连
+     */
+    private int time = 120;
+
     private MyBinder mBinder = new MyBinder();
+
     private SharedPreferences sp;
+
     private String userId = "";
+
+    private ConnectType connectType = ConnectType.DISCONNECTED;
+    /**
+     * 处理重连动作的Handler
+     */
+    Handler reconnectHandler = new Handler() {
+        @Override
+        public void handleMessage(android.os.Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case COUNT_DOWN:
+                    if (time > 0 && connectType == ConnectType.DISCONNECTED) {
+                        reconnectHandler.sendEmptyMessageDelayed(COUNT_DOWN, 1000);
+                        time--;
+                    }
+                    break;
+                case RECONNECT:
+                    reconnectServer();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     /**
      * 可用的服务
      */
@@ -74,7 +112,7 @@ public class IMService extends Service {
 
             @Override
             public void onPeerState(String uid, String code) {
-                showLog(String.format("%s   %s",uid,code));
+                showLog(String.format("%s   %s", uid, code));
                 // 用户状态改变
                 if (uid.equals(Constans.TEST_DEVICE_UID)) {//绑定的用户状态改变才通知用户
                     Intent intent = new Intent();
@@ -108,8 +146,15 @@ public class IMService extends Service {
             }
 
             @Override
-            public void onBroken(Server svr, int errorCode, String reason) {
-
+            public void onBroken(Server svr, int errorCode, String reason) {//服务器断开连接--->
+                TestUtil.showTest("断开连接 : " + errorCode + reason);
+                connectType = ConnectType.DISCONNECTED;
+                //与服务器异常断连回调
+                if (errorCode != 1301) {//非异地登录,则开始自动重连
+                    time = 120;
+                    reconnectHandler.sendEmptyMessage(COUNT_DOWN);
+                    reconnectHandler.sendEmptyMessageDelayed(RECONNECT, 10000);
+                }
             }
         };
     }
@@ -122,13 +167,11 @@ public class IMService extends Service {
             @Override
             public void onSuccess() {
                 // 正在扫描服务器，
-                // 扫描到的服务器通过sdk全局回调返回。
                 Log.i("test", "正在扫描服务器...");
             }
 
             @Override
             public void onFailure(ErrorInfo errorInfo) {
-                // 扫描服务器失败
                 Intent intent = new Intent();
                 intent.setAction(Constans.CONNECT_FAIL);
                 LocalBroadcastManager.getInstance(IMService.this).sendBroadcast(intent);
@@ -155,6 +198,7 @@ public class IMService extends Service {
                 Intent intent = new Intent();
                 intent.setAction(Constans.CONNECT_SUCCESS);
                 LocalBroadcastManager.getInstance(IMService.this).sendBroadcast(intent);
+                connectType = ConnectType.CONNECTED;
             }
 
             @Override
@@ -199,8 +243,49 @@ public class IMService extends Service {
         super.onDestroy();
     }
 
-    public class MyBinder extends Binder {
+    void showLog(String log) {
+        Log.v(TAG, log);
+    }
 
+    /**
+     * 重连服务器
+     */
+    void reconnectServer() {
+        if (connectType == ConnectType.CONNECTED) {
+            return;
+        }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                TestUtil.showTest("开始重连服务器......");
+                sdkContext.reConnect(new IActionListener() {
+                    @Override
+                    public void onSuccess() {
+                        TestUtil.showTest("重连服务器成功");
+                        connectType = ConnectType.CONNECTED;
+                    }
+
+                    @Override
+                    public void onFailure(ErrorInfo errorInfo) {
+                        connectType = ConnectType.DISCONNECTED;
+                        if (time < 2) {
+                        }
+                    }
+                });
+                try {//等待重连结果,决定是否再次重连
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (connectType == ConnectType.DISCONNECTED) {
+                    reconnectHandler.sendEmptyMessageDelayed(RECONNECT, 5000);
+                }
+            }
+        }).start();
+
+    }
+
+    public class MyBinder extends Binder {
         public ISDKContext isdkContext;
 
         /**
@@ -225,8 +310,4 @@ public class IMService extends Service {
             stopSelf();
         }
     }
-void showLog(String log){
-    Log.v(TAG,log);
-}
-
 }

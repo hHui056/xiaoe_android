@@ -1,1 +1,1 @@
-include ':app', ':sweetdialoglibrary'
+include ':app', ':sweetdialoglibrary', ':MPChartLib'
