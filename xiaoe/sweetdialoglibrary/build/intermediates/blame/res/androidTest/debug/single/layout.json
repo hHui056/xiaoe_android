@@ -60,12 +60,12 @@
         "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\layout\\abc_action_menu_layout.xml"
     },
     {
-        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_simple_dropdown_hint.xml",
-        "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\layout\\abc_simple_dropdown_hint.xml"
-    },
-    {
         "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_activity_chooser_view_include.xml",
         "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\layout\\abc_activity_chooser_view_include.xml"
+    },
+    {
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_simple_dropdown_hint.xml",
+        "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\layout\\abc_simple_dropdown_hint.xml"
     },
     {
         "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\abc_expanded_menu_layout.xml",

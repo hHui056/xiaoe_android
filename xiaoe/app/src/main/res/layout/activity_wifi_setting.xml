@@ -71,6 +71,7 @@
                     android:layout_weight="5"
                     android:background="@android:color/transparent"
                     android:hint="网络密码"
+                    android:inputType="textPassword"
                     android:textSize="15sp" />
 
                 <ImageView

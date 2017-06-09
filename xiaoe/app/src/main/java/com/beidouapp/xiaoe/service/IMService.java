@@ -27,6 +27,9 @@ import com.beidouapp.xiaoe.utils.ConnectType;
 import com.beidouapp.xiaoe.utils.Constans;
 import com.beidouapp.xiaoe.utils.TestUtil;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class IMService extends Service {
     public static final String TAG = "IMService";
@@ -36,17 +39,14 @@ public class IMService extends Service {
     public static final int RECONNECT = 1;//重连
 
     public ISDKContext sdkContext;
+    TimerTask task;
     /**
      * 重连计时  120s内未自动重连成功，则手动重连
      */
     private int time = 120;
-
     private MyBinder mBinder = new MyBinder();
-
     private SharedPreferences sp;
-
     private String userId = "";
-
     private ConnectType connectType = ConnectType.DISCONNECTED;
     /**
      * 处理重连动作的Handler
@@ -147,7 +147,7 @@ public class IMService extends Service {
 
             @Override
             public void onBroken(Server svr, int errorCode, String reason) {//服务器断开连接--->
-                TestUtil.showTest("断开连接 : " + errorCode + reason);
+                TestUtil.showTest(String.format("断开连接:  %s  %s", errorCode, reason));
                 connectType = ConnectType.DISCONNECTED;
                 //与服务器异常断连回调
                 if (errorCode != 1301) {//非异地登录,则开始自动重连
@@ -208,7 +208,6 @@ public class IMService extends Service {
                 intent.setAction(Constans.CONNECT_FAIL);
                 LocalBroadcastManager.getInstance(IMService.this).sendBroadcast(intent);
             }
-
         });
     }
 
@@ -226,7 +225,6 @@ public class IMService extends Service {
             @Override
             public void onFailure(ErrorInfo errorInfo) {
                 // 断开连接失败
-
             }
         });
     }
@@ -254,9 +252,18 @@ public class IMService extends Service {
         if (connectType == ConnectType.CONNECTED) {
             return;
         }
-        new Thread(new Runnable() {
+        task = new TimerTask() {
             @Override
             public void run() {
+                if (connectType == ConnectType.CONNECTED) {
+                    task.cancel();
+                    return;
+                }
+                if (time < 2) {//2min 内未重连成功--->取消自动重连（提示已经断开连接）
+                    TestUtil.showTest("2min 内未重连上服务器");
+                    task.cancel();
+                    return;
+                }
                 TestUtil.showTest("开始重连服务器......");
                 sdkContext.reConnect(new IActionListener() {
                     @Override
@@ -267,21 +274,16 @@ public class IMService extends Service {
 
                     @Override
                     public void onFailure(ErrorInfo errorInfo) {
+                        TestUtil.showTest("重连服务器失败: " + errorInfo.getReason());
                         connectType = ConnectType.DISCONNECTED;
-                        if (time < 2) {
-                        }
                     }
                 });
-                try {//等待重连结果,决定是否再次重连
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if (connectType == ConnectType.DISCONNECTED) {
-                    reconnectHandler.sendEmptyMessageDelayed(RECONNECT, 5000);
-                }
             }
-        }).start();
+        };
+        Timer timer = new Timer();
+        // 5000，延时5秒后执行。
+        // 5000，每隔5秒执行1次task。
+        timer.schedule(task, 5000, 5000);
 
     }
 

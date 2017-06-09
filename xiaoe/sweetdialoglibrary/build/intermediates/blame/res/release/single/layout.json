@@ -32,12 +32,12 @@
         "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\layout\\abc_action_bar_up_container.xml"
     },
     {
-        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_toolbar.xml",
-        "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\layout\\abc_screen_toolbar.xml"
-    },
-    {
         "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\release\\layout\\abc_action_mode_close_item_material.xml",
         "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\layout\\abc_action_mode_close_item_material.xml"
+    },
+    {
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\release\\layout\\abc_screen_toolbar.xml",
+        "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\layout\\abc_screen_toolbar.xml"
     },
     {
         "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\release\\layout\\abc_simple_dropdown_hint.xml",

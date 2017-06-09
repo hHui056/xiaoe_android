@@ -14,5 +14,6 @@
     <string name="qunzuguanli_describe">添加和管理多个设备</string>
     <string name="shujutouchuan">数据透传</string>
     <string name="shujutouchuan_describe">通过APP向设备发数据请用透传板体验此功能</string>
+    <string name="settingnotify">急速配置中，请耐心等待......</string>
 
 </resources>

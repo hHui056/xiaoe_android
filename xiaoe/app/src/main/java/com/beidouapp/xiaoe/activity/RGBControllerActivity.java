@@ -1,12 +1,15 @@
 package com.beidouapp.xiaoe.activity;
 
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -35,23 +38,21 @@ import com.github.mikephil.charting.utils.MPPointF;
 import java.util.ArrayList;
 
 public class RGBControllerActivity extends BaseActivity implements OnChartValueSelectedListener, View.OnClickListener {
-
     PieChart pieLight;
     Button btnBackToFirstpage;
     Intent intentService;
     ISDKContext sdkContext;
+    MyBroadcastReceiver rec;
     private IMService.MyBinder mBinder;
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
-
         }
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mBinder = (IMService.MyBinder) service;
             sdkContext = mBinder.getSdkContext();
-
         }
     };
 
@@ -62,6 +63,7 @@ public class RGBControllerActivity extends BaseActivity implements OnChartValueS
 
         initPieChart();
         bindService();
+        registBroadcase();
     }
 
     /**
@@ -121,8 +123,8 @@ public class RGBControllerActivity extends BaseActivity implements OnChartValueS
     }
 
     @Override
-    public void onNothingSelected() {
-
+    public void onNothingSelected() {//未选中任何一项
+        TestUtil.showTest("未选中任何一项");
     }
 
     /**
@@ -131,11 +133,9 @@ public class RGBControllerActivity extends BaseActivity implements OnChartValueS
      * @param index
      */
     void controlLight(int index) {
-        Instruction instruction = new Instruction.Builder().setCmd(Instruction.Cmd.CONTROL).setBody(new RGBControllerReqBody(index))
-                .createInstruction();
+        Instruction instruction = new Instruction.Builder().setCmd(Instruction.Cmd.CONTROL).setBody(new RGBControllerReqBody(index)).createInstruction();
         Message message = new Message();
         message.setPayload(instruction.toByteArray());
-
         sdkContext.chatTo(Constans.TEST_DEVICE_UID, message, new IActionListener() {
             @Override
             public void onSuccess() {
@@ -144,11 +144,14 @@ public class RGBControllerActivity extends BaseActivity implements OnChartValueS
 
             @Override
             public void onFailure(ErrorInfo errorInfo) {
-                TestUtil.showTest("控制RGB失败  " + errorInfo.getReason());
+                TestUtil.showTest("控制RGB失败  " + errorInfo.getCode() + errorInfo.getReason());
             }
         });
     }
 
+    /**
+     * 绑定service
+     */
     void bindService() {
         intentService = new Intent(this.getApplicationContext(), IMService.class);
         bindService(intentService, connection, Context.BIND_AUTO_CREATE);
@@ -166,6 +169,35 @@ public class RGBControllerActivity extends BaseActivity implements OnChartValueS
     public void onClick(View v) {
         if (v.getId() == R.id.btn_back_to_firstpage) {
             finish();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(connection);
+        LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(rec);
+    }
+
+    /**
+     * 注册广播
+     */
+    public void registBroadcase() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constans.RECEIVE_MSG);
+        filter.addAction(Constans.CMD_WRONG);
+        rec = new MyBroadcastReceiver();
+        LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(rec, filter);
+    }
+
+    public class MyBroadcastReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals(Constans.CMD_WRONG)) {
+                showErrorMessage("请确认档位和跳线帽都正确后再试");
+            }
         }
     }
 }

@@ -44,8 +44,10 @@ public class BaseActivity extends Activity {
     }
 
     public void showMessageOnDialog(String data) {
-        if (sweetProgressDialog.isShowing()) {
-            sweetProgressDialog.dismiss();
+        if (sweetProgressDialog != null) {
+            if (sweetProgressDialog.isShowing()) {
+                sweetProgressDialog.dismiss();
+            }
         }
         sweetAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.NORMAL_TYPE);
         sweetAlertDialog.getProgressHelper().setBarColor(Color.parseColor("#FF9900"));
@@ -59,14 +61,14 @@ public class BaseActivity extends Activity {
     }
 
     public void showErrorMessage(String data) {
-        if (sweetProgressDialog.isShowing()) {
-            sweetProgressDialog.dismiss();
+        if (sweetProgressDialog != null) {
+            if (sweetProgressDialog.isShowing()) {
+                sweetProgressDialog.dismiss();
+            }
         }
         sweetAlertDialog = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE);
         sweetAlertDialog.getProgressHelper().setBarColor(Color.parseColor("#FF9900"));
         sweetAlertDialog.setContentText(data);
         sweetAlertDialog.show();
-
     }
-
 }

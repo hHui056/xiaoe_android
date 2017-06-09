@@ -61,5 +61,4 @@ public class Constans {
         public static final String SCAN_APPKEY = "scan_appkey";
         public static final String SCAN_UID = "scan_uid";
     }
-
 }

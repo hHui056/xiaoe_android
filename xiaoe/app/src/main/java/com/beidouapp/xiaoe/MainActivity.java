@@ -400,6 +400,13 @@ public class MainActivity extends BaseActivity {
         Log.v(TAG, log);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unbindService(connection);
+        LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(rec);
+    }
+
     private class MyBroadcastReceiver extends BroadcastReceiver {
 
         @Override
