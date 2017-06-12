@@ -116,9 +116,23 @@ public class InstructionParser {
                 break;
             case Instruction.Cmd.CONTROL_BACK://控制报文回复
                 if (data[0] == Instruction.DATA0.RGB) {//RGB控制反馈
-
+                    if (data[1]==0x00){
+                        body = new RGBControllerResBody();
+                        body.parseContent(data);
+                        instruction.body = body;
+                        body.setIsAvailable(true);
+                    }else{
+                        Log.w(TAG, "发送报文不正确" + data[1]);
+                    }
                 } else if (data[0] == Instruction.DATA0.LED) {//LED控制反馈
-
+                       if (data[1]==0x00){
+                           body = new LEDControllerResBody();
+                           body.parseContent(data);
+                           instruction.body = body;
+                           body.setIsAvailable(true);
+                       }else{
+                           Log.w(TAG, "发送报文不正确" + data[1]);
+                       }
                 }
                 break;
         }

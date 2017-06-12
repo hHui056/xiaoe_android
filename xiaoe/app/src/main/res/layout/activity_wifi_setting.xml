@@ -91,7 +91,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="25dp"
-            android:background="@drawable/start_setting"
+            android:background="@drawable/hhstart_setting"
             android:text="开始配置"
             android:textColor="@color/title_background" />
     </RelativeLayout>

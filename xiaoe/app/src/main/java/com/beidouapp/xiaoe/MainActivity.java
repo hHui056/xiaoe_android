@@ -22,14 +22,17 @@ import com.beidouapp.et.IActionListener;
 import com.beidouapp.et.ISDKContext;
 import com.beidouapp.et.Message;
 import com.beidouapp.et.StatusListener;
+import com.beidouapp.et.TimeListener;
 import com.beidouapp.xiaoe.activity.BaseActivity;
 import com.beidouapp.xiaoe.activity.CaptureActivity;
 import com.beidouapp.xiaoe.activity.RGBControllerActivity;
+import com.beidouapp.xiaoe.activity.VisualInteractiveActivity;
 import com.beidouapp.xiaoe.activity.WifiSettingActivity;
 import com.beidouapp.xiaoe.instruction.AirReqBody;
 import com.beidouapp.xiaoe.instruction.AirResBody;
 import com.beidouapp.xiaoe.instruction.Body;
 import com.beidouapp.xiaoe.instruction.Instruction;
+import com.beidouapp.xiaoe.instruction.LEDControllerReqBody;
 import com.beidouapp.xiaoe.instruction.TemperatureAndHumidityReqBody;
 import com.beidouapp.xiaoe.instruction.TemperatureAndHumidityResBody;
 import com.beidouapp.xiaoe.service.IMService;
@@ -205,11 +208,14 @@ public class MainActivity extends BaseActivity {
                 showToast("群组管理");
                 break;
             case R.id.opt_keshijiaohu:
-                showToast("可视交互");
+                isShowErrorMessage=false;
+                startActivity(new Intent(MainActivity.this, VisualInteractiveActivity.class));
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
             case R.id.opt_duocaidengguang:
                 isShowErrorMessage = false;
                 startActivity(new Intent(MainActivity.this, RGBControllerActivity.class));
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
             case R.id.opt_yuyinliuyan:
                 showToast("语音留言");
@@ -265,20 +271,29 @@ public class MainActivity extends BaseActivity {
         message.setPayload(instruction.toByteArray());
         ShowProgressDialog();
         TempQureyType = QureyType.QUREYING;
+        TestUtil.showTest("-------------①-------------");
+        TestUtil.showTest("------------" + sdkContext + "----------");
+        sdkContext.getIlinkTime(new TimeListener() {
+            @Override
+            public void onResult(long l) {
+                TestUtil.showTest("iLinkTime  " + l);
+            }
+        });
         sdkContext.chatTo(Constans.TEST_DEVICE_UID, message, new IActionListener() {
             @Override
             public void onSuccess() {
-                TestUtil.showTest(TAG + "查询温湿度成功");
+                TestUtil.showTest(TAG + "温湿度指令发送成功");
             }
 
             @Override
             public void onFailure(ErrorInfo errorInfo) {
-                TestUtil.showTest(TAG + "查询温湿度失败");
+
+                TestUtil.showTest(TAG + "温湿度指令发送失败 " + errorInfo.getReason());
             }
         });
+        TestUtil.showTest("-------------②-------------");
         checkTempIsHaveRes();
     }
-
 
     /**
      * 查询大气压
@@ -301,12 +316,12 @@ public class MainActivity extends BaseActivity {
         sdkContext.chatTo(Constans.TEST_DEVICE_UID, message, new IActionListener() {
             @Override
             public void onSuccess() {
-                TestUtil.showTest(TAG + "查询大气压成功");
+                TestUtil.showTest(TAG + "大气压指令发送成功");
             }
 
             @Override
             public void onFailure(ErrorInfo errorInfo) {
-                TestUtil.showTest(TAG + "查询大气压失败");
+                TestUtil.showTest(TAG + "大气压指令发送失败 " + errorInfo.getReason());
             }
         });
         checkAirIsHaveRes();
@@ -335,6 +350,24 @@ public class MainActivity extends BaseActivity {
                 }
             }
         }).start();
+    }
+
+    public void testSendLEDMsg(String data) {
+        Instruction instruction = new Instruction.Builder().setCmd(Instruction.Cmd.CONTROL).setBody(new LEDControllerReqBody(data))
+                .createInstruction();
+        Message message = new Message();
+        message.setPayload(instruction.toByteArray());
+        sdkContext.chatTo(Constans.TEST_DEVICE_UID, message, new IActionListener() {
+            @Override
+            public void onSuccess() {
+                TestUtil.showTest("测试文字发送成功");
+            }
+
+            @Override
+            public void onFailure(ErrorInfo errorInfo) {
+                TestUtil.showTest("测试文字发送失败");
+            }
+        });
     }
 
     /**
@@ -424,11 +457,13 @@ public class MainActivity extends BaseActivity {
                 Instruction instruction = (Instruction) intent.getSerializableExtra(Constans.ILINK_MSG_KEY);
                 Body body = instruction.getBody();
                 if (body instanceof TemperatureAndHumidityResBody) {//收到温湿度查询反馈
+                    TestUtil.showTest("----收到温湿度查询反馈----");
                     TempQureyType = QureyType.QUREYEND;
                     TemperatureAndHumidityResBody tempbody = (TemperatureAndHumidityResBody) body;
                     showMessageOnDialog(String.format("温度(℃) %s.%s ℃\n\n湿度(RH) %s.%s", tempbody.getTempeInt(),
                             tempbody.getTempeDec(), tempbody.getHumInt(), tempbody.getHunDec()) + "%");
                 } else if (body instanceof AirResBody) {//收到大气压查询反馈
+                    TestUtil.showTest("----收到大气压查询反馈----");
                     AirQureyType = QureyType.QUREYEND;
                     AirResBody airbody = (AirResBody) body;
                     showMessageOnDialog(String.format("大气压(Pa) %s \n\n海拔(m) %s", airbody.getAir(), airbody.getHigh()));

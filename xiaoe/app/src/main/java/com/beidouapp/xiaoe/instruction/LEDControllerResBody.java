@@ -5,4 +5,16 @@ package com.beidouapp.xiaoe.instruction;
  */
 
 public class LEDControllerResBody extends Body {
+    private boolean isSuccess = false;
+
+    @Override
+    public void parseContent(byte[] content) {
+        if (content[1] == 0x00) {
+            isSuccess = true;
+        }
+    }
+
+    public boolean getIsSuccess() {
+        return isSuccess;
+    }
 }
