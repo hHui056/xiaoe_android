@@ -17,6 +17,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- 相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 录音机使用权限 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 允许程序改变网络连接状态 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!-- 配置权限，用来记录应用配置信息 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
         android:allowBackup="true"
@@ -43,7 +49,9 @@
         <activity
             android:name=".activity.RGBControllerActivity"
             android:theme="@style/transcutestyle" />
-        <activity android:name=".activity.VisualInteractiveActivity"></activity>
+        <activity android:name=".activity.VisualInteractiveActivity" />
+        <activity android:name=".activity.VoiceControlActivity" />
+        <activity android:name=".activity.GroupManageActivity"></activity>
     </application>
 
 </manifest>

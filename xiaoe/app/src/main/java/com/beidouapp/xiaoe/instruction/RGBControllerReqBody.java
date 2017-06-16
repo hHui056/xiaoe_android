@@ -70,6 +70,16 @@ public class RGBControllerReqBody extends Body {
                 data[2] = (byte) 0;
                 data[3] = (byte) 255;
                 break;
+            case 12://关灯
+                data[1] = (byte) 0;
+                data[2] = (byte) 0;
+                data[3] = (byte) 0;
+                break;
+            case 13://开灯
+                data[1] = (byte) 250;
+                data[2] = (byte) 40;
+                data[3] = (byte) 11;
+                break;
             default:
                 break;
         }

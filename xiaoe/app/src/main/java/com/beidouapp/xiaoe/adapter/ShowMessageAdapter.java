@@ -25,8 +25,8 @@ public class ShowMessageAdapter extends BaseAdapter {
     public static final int MESSAGE_SOUND = 0x02;
     Context context;
     ArrayList<MessageItem> list;
+    ImageClickListener imageClickListener;
     private LayoutInflater mInflater;
-
 
     public ShowMessageAdapter(Context context, ArrayList<MessageItem> list) {
         this.context = context;
@@ -34,6 +34,9 @@ public class ShowMessageAdapter extends BaseAdapter {
         mInflater = LayoutInflater.from(context);
     }
 
+    public void setImageClickListener(ImageClickListener imageClickListener) {
+        this.imageClickListener = imageClickListener;
+    }
 
     @Override
     public int getCount() {
@@ -51,7 +54,7 @@ public class ShowMessageAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, final ViewGroup parent) {
         int msgType = getItemViewType(position);
         BaseHolder viewHolder = null;
         if (viewHolder == null && mInflater != null) {
@@ -72,6 +75,16 @@ public class ShowMessageAdapter extends BaseAdapter {
                 case MESSAGE_SOUND:
                     convertView = mInflater.inflate(R.layout.sound_layout, parent, false);
                     viewHolder = new SoundHolder();
+                    ((SoundHolder) viewHolder).image = (ImageView) convertView.findViewById(R.id.img_sound);
+                    ((SoundHolder) viewHolder).image.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (!list.get(position).getSoundPath().equals("")) {
+                                String soundFilePath = list.get(position).getSoundPath();
+                                imageClickListener.OnImageClick(soundFilePath);
+                            }
+                        }
+                    });
                     convertView.setTag(viewHolder);
                     break;
                 default:
@@ -102,6 +115,10 @@ public class ShowMessageAdapter extends BaseAdapter {
                 return MESSAGE_SOMEONE;
             }
         }
+    }
+
+    public interface ImageClickListener {
+        public void OnImageClick(String soundpath);
     }
 
     class BaseHolder {

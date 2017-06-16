@@ -16,6 +16,7 @@ import butterknife.OnClick;
 
 /**
  * 绑定设备
+ * @author hHui
  */
 public class QRSuccessActivity extends BaseActivity {
 

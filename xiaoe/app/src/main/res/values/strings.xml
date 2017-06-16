@@ -16,5 +16,27 @@
     <string name="shujutouchuan_describe">通过APP向设备发数据请用透传板体验此功能</string>
     <string name="settingnotify">急速配置中，请耐心等待......</string>
     <string name="ledmessage">向LED屏发送消息</string>
-
+    <string name="waring_msg">开发板档位或跳线帽不正确</string>
+    <string name="led_control_success">LED控制成功</string>
+    <string name="control_faild">控制失败</string>
+    <string name="only_chinese">只能输入中文</string>
+    <string name="order_wrong">指令无法识别</string>
+    <string name="network_wrong">连接失败,请检查网络</string>
+    <string name="connect_success">连接成功</string>
+    <string name="qurey_air_faild">大气压查询失败!</string>
+    <string name="qurey_temp_faild">温度查询失败!</string>
+    <string name="server_not_connected">未连接上服务器,不能进行此操作</string>
+    <string name="device_not_online">设备不在线，不能进行此操作</string>
+    <string name="deviceonline">设备在线</string>
+    <string name="deviceoutofline">设备离线</string>
+    <string name="voice_init_faild">语音识别初始化失败</string>
+    <string name="no_wifi">手机未连接WiFi</string>
+    <string name="config_wifi">配置WiFi</string>
+    <string name="config_success">配置完成</string>
+    <string name="have_new_device_connect">有新设备连接</string>
+    <string name="sure">确认</string>
+    <string name="cancel">取  消</string>
+    <string name="passwrod_toolong">wifi密码超长</string>
+    <string name="config_timeout">配置超时，请重启设备再次配置</string>
+    <string name="light_control_success">灯光控制成功</string>
 </resources>

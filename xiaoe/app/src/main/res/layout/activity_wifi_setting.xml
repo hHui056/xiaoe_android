@@ -53,7 +53,6 @@
                 android:background="@android:color/transparent"
                 android:editable="false"
                 android:paddingLeft="18dp"
-                android:text="Android-AP"
                 android:textSize="15sp" />
 
             <LinearLayout

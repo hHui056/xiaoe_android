@@ -68,6 +68,7 @@ public class VisualInteractiveActivity extends BaseActivity {
     private ServiceConnection connection = new ServiceConnection() {
         @Override
         public void onServiceDisconnected(ComponentName name) {
+
         }
 
         @Override
@@ -142,7 +143,7 @@ public class VisualInteractiveActivity extends BaseActivity {
     public void sendMessage(final String data) {
         closeKeyboard();
          if (!isChinese(data)){
-            showErrorMessage("只能输入中文");
+             showErrorMessage(getResources().getString(R.string.only_chinese));
              editMessageContent.setText("");
              return;
          }
@@ -171,7 +172,7 @@ public class VisualInteractiveActivity extends BaseActivity {
 
             @Override
             public void onFailure(ErrorInfo errorInfo) {
-                MessageItem item1 = new MessageItem(MessageOwner.someone, "控制失败");
+                MessageItem item1 = new MessageItem(MessageOwner.someone, getResources().getString(R.string.control_faild));
                 messageLists.add(item1);
                 adapter.notifyDataSetChanged();
             }
@@ -198,7 +199,7 @@ public class VisualInteractiveActivity extends BaseActivity {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(Constans.CMD_WRONG)) {
-                MessageItem item = new MessageItem(MessageOwner.someone, "开发板档位或跳线帽不正确");
+                MessageItem item = new MessageItem(MessageOwner.someone, getResources().getString(R.string.waring_msg));
                 messageLists.add(item);
                 if (adapter == null) {
                     adapter = new ShowMessageAdapter(VisualInteractiveActivity.this, messageLists);
@@ -211,7 +212,7 @@ public class VisualInteractiveActivity extends BaseActivity {
                 Instruction instruction = (Instruction) intent.getSerializableExtra(Constans.ILINK_MSG_KEY);
                 Body body = instruction.getBody();
                 if (body instanceof LEDControllerResBody) {//led控制反馈
-                    MessageItem item = new MessageItem(MessageOwner.someone, "LED控制成功");
+                    MessageItem item = new MessageItem(MessageOwner.someone, getResources().getString(R.string.led_control_success));
                     messageLists.add(item);
                     if (adapter == null) {
                         adapter = new ShowMessageAdapter(VisualInteractiveActivity.this, messageLists);

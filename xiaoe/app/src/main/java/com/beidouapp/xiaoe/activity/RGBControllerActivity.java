@@ -37,6 +37,11 @@ import com.github.mikephil.charting.utils.MPPointF;
 
 import java.util.ArrayList;
 
+/**
+ * 灯光控制
+ *
+ * @author hHui
+ */
 public class RGBControllerActivity extends BaseActivity implements OnChartValueSelectedListener, View.OnClickListener {
     PieChart pieLight;
     Button btnBackToFirstpage;
@@ -196,7 +201,7 @@ public class RGBControllerActivity extends BaseActivity implements OnChartValueS
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (action.equals(Constans.CMD_WRONG)) {
-                showErrorMessage("请确认档位和跳线帽都正确后再试");
+                showErrorMessage(getString(R.string.waring_msg));
             }
         }
     }

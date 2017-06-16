@@ -10,7 +10,6 @@ public class Body {
      * 消息体的长度，字节数。
      */
     public int length = 0;
-
     /**
      * 消息体内容格式是否合法
      */

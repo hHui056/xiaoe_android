@@ -22,17 +22,16 @@ import com.beidouapp.et.IActionListener;
 import com.beidouapp.et.ISDKContext;
 import com.beidouapp.et.Message;
 import com.beidouapp.et.StatusListener;
-import com.beidouapp.et.TimeListener;
 import com.beidouapp.xiaoe.activity.BaseActivity;
 import com.beidouapp.xiaoe.activity.CaptureActivity;
 import com.beidouapp.xiaoe.activity.RGBControllerActivity;
 import com.beidouapp.xiaoe.activity.VisualInteractiveActivity;
+import com.beidouapp.xiaoe.activity.VoiceControlActivity;
 import com.beidouapp.xiaoe.activity.WifiSettingActivity;
 import com.beidouapp.xiaoe.instruction.AirReqBody;
 import com.beidouapp.xiaoe.instruction.AirResBody;
 import com.beidouapp.xiaoe.instruction.Body;
 import com.beidouapp.xiaoe.instruction.Instruction;
-import com.beidouapp.xiaoe.instruction.LEDControllerReqBody;
 import com.beidouapp.xiaoe.instruction.TemperatureAndHumidityReqBody;
 import com.beidouapp.xiaoe.instruction.TemperatureAndHumidityResBody;
 import com.beidouapp.xiaoe.service.IMService;
@@ -88,9 +87,9 @@ public class MainActivity extends BaseActivity {
             switch (msg.what) {
                 case REFRESH_DEVICE_STATE:
                     if (isDeviceOnline) {//在线
-                        txtDeviceState.setText("设备在线");
+                        txtDeviceState.setText(getString(R.string.deviceonline));
                     } else {
-                        txtDeviceState.setText("设备离线");
+                        txtDeviceState.setText(getString(R.string.deviceoutofline));
                     }
                     break;
                 default:
@@ -202,13 +201,15 @@ public class MainActivity extends BaseActivity {
                 QureyAir();
                 break;
             case R.id.opt_yuyinkongzhi:
-                showToast("语音控制");
+                isShowErrorMessage = false;
+                startActivity(new Intent(MainActivity.this, VoiceControlActivity.class));
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
             case R.id.opt_qunzuguanli:
                 showToast("群组管理");
                 break;
             case R.id.opt_keshijiaohu:
-                isShowErrorMessage=false;
+                isShowErrorMessage = false;
                 startActivity(new Intent(MainActivity.this, VisualInteractiveActivity.class));
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
@@ -258,11 +259,11 @@ public class MainActivity extends BaseActivity {
      */
     public void QureyTempAndHum() {
         if (!isConnectServer) {
-            showErrorMessage("未连接上服务器,不能进行此操作");
+            showErrorMessage(getString(R.string.server_not_connected));
             return;
         }
         if (!isDeviceOnline) {
-            showErrorMessage("设备不在线，不能进行此操作");
+            showErrorMessage(getString(R.string.device_not_online));
             return;
         }
         Instruction instruction = new Instruction.Builder().setCmd(Instruction.Cmd.QUERY).setBody(new TemperatureAndHumidityReqBody(Instruction.DATA0.TEMPERA_HUM.BOTH))
@@ -273,12 +274,6 @@ public class MainActivity extends BaseActivity {
         TempQureyType = QureyType.QUREYING;
         TestUtil.showTest("-------------①-------------");
         TestUtil.showTest("------------" + sdkContext + "----------");
-        sdkContext.getIlinkTime(new TimeListener() {
-            @Override
-            public void onResult(long l) {
-                TestUtil.showTest("iLinkTime  " + l);
-            }
-        });
         sdkContext.chatTo(Constans.TEST_DEVICE_UID, message, new IActionListener() {
             @Override
             public void onSuccess() {
@@ -300,11 +295,11 @@ public class MainActivity extends BaseActivity {
      */
     public void QureyAir() {
         if (!isConnectServer) {
-            showErrorMessage("未连接上服务器,不能进行此操作");
+            showErrorMessage(getString(R.string.server_not_connected));
             return;
         }
         if (!isDeviceOnline) {
-            showErrorMessage("设备不在线，不能进行此操作");
+            showErrorMessage(getString(R.string.device_not_online));
             return;
         }
         Instruction instruction = new Instruction.Builder().setCmd(Instruction.Cmd.QUERY).setBody(new AirReqBody(Instruction.DATA0.AIRPRESS))
@@ -341,7 +336,7 @@ public class MainActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 MissProgressDialog();
-                                showMessageOnDialog("温度查询失败!");
+                                showMessageOnDialog(getString(R.string.qurey_temp_faild));
                             }
                         });
                     }
@@ -352,23 +347,6 @@ public class MainActivity extends BaseActivity {
         }).start();
     }
 
-    public void testSendLEDMsg(String data) {
-        Instruction instruction = new Instruction.Builder().setCmd(Instruction.Cmd.CONTROL).setBody(new LEDControllerReqBody(data))
-                .createInstruction();
-        Message message = new Message();
-        message.setPayload(instruction.toByteArray());
-        sdkContext.chatTo(Constans.TEST_DEVICE_UID, message, new IActionListener() {
-            @Override
-            public void onSuccess() {
-                TestUtil.showTest("测试文字发送成功");
-            }
-
-            @Override
-            public void onFailure(ErrorInfo errorInfo) {
-                TestUtil.showTest("测试文字发送失败");
-            }
-        });
-    }
 
     /**
      * 10s 过后检查是否有查詢回复
@@ -384,7 +362,7 @@ public class MainActivity extends BaseActivity {
                             @Override
                             public void run() {
                                 MissProgressDialog();
-                                showMessageOnDialog("大气压查询失败!");
+                                showMessageOnDialog(getString(R.string.qurey_air_faild));
                             }
                         });
                     }
@@ -448,12 +426,15 @@ public class MainActivity extends BaseActivity {
             if (action.equals(Constans.CONNECT_SUCCESS)) {//连接成功
                 MissProgressDialog();
                 isConnectServer = true;
-                showToast("连接成功");
+                showToast(getString(R.string.connect_success));
                 getDeviceStates();
             } else if (action.equals(Constans.CONNECT_FAIL)) {//连接失败
                 MissProgressDialog();
-                showErrorMessage("连接失败,请检查网络");
+                showErrorMessage(getString(R.string.network_wrong));
             } else if (action.equals(Constans.RECEIVE_MSG)) {//收到控制或查询反馈
+                if (!isShowErrorMessage) {
+                    return;
+                }
                 Instruction instruction = (Instruction) intent.getSerializableExtra(Constans.ILINK_MSG_KEY);
                 Body body = instruction.getBody();
                 if (body instanceof TemperatureAndHumidityResBody) {//收到温湿度查询反馈
@@ -472,7 +453,7 @@ public class MainActivity extends BaseActivity {
                 TempQureyType = QureyType.QUREYEND;
                 AirQureyType = QureyType.QUREYEND;
                 if (isShowErrorMessage) {
-                    showErrorMessage("请确认档位和跳线帽都正确后再试");
+                    showErrorMessage(getString(R.string.waring_msg));
                 }
             } else if (action.equals(Constans.LOST_CONNECT)) {//失去连接
 

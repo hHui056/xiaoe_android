@@ -7,15 +7,19 @@ package com.beidouapp.xiaoe.bean;
  */
 
 public class MessageItem {
-    MessageOwner owner;
+    MessageOwner owner = MessageOwner.me;
     /**
      * 消息内容
      */
-    String msg;
+    String msg = "";
     /**
      * 是否问录音文件
      */
     boolean isSound = false;
+    /**
+     * 录音地址
+     */
+    String soundPath = "";
 
     /**
      * @param owner 消息所有者  someone：消息显示在左边   me：消息显示在右边
@@ -27,14 +31,20 @@ public class MessageItem {
     }
 
     /**
-     * @param isSound 是否是录音文件
-     * @param owner
-     * @param msg
+     * @param isSound   是否是录音文件
+     * @param soundPath
      */
-    public MessageItem(boolean isSound, MessageOwner owner, String msg) {
+    public MessageItem(boolean isSound, String soundPath) {
         this.isSound = isSound;
-        this.owner = owner;
-        this.msg = msg;
+        this.soundPath = soundPath;
+    }
+
+    public String getSoundPath() {
+        return soundPath;
+    }
+
+    public void setSoundPath(String soundPath) {
+        this.soundPath = soundPath;
     }
 
     public boolean isSound() {

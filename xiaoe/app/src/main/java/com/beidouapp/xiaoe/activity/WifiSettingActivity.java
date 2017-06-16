@@ -98,7 +98,7 @@ public class WifiSettingActivity extends BaseActivity {
                 if (mywifi == null || mywifi.equals("")) {//无网络
                     if (dialog == null) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(WifiSettingActivity.this);
-                        builder.setMessage("手机未连接WiFi");
+                        builder.setMessage(getString(R.string.no_wifi));
                         dialog = builder.create();
                         dialog.show();
                     } else {
@@ -132,7 +132,7 @@ public class WifiSettingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi_setting);
         ButterKnife.bind(this);
-        titleWifiSetting.setTitle("配置WiFi");
+        titleWifiSetting.setTitle(getString(R.string.config_wifi));
         mWifiAdmin = new EspWifiAdminSimple(this);
         init();
         startCheackWifi();
@@ -171,7 +171,7 @@ public class WifiSettingActivity extends BaseActivity {
         String apSsid = editSsid.getText().toString();
         String apPassword = editPasswrod.getText().toString();
         if (apPassword.length() > 64) {
-            Toast.makeText(WifiSettingActivity.this, "wifi密码超长！！！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(WifiSettingActivity.this, getString(R.string.passwrod_toolong), Toast.LENGTH_SHORT).show();
             return;
         }
         String apBssid = mWifiAdmin.getWifiConnectedBssid();
@@ -184,7 +184,7 @@ public class WifiSettingActivity extends BaseActivity {
         if (apSsid == null || apBssid == null) {
             if (dialog == null) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(WifiSettingActivity.this);
-                builder.setMessage("手机未连接WiFi");
+                builder.setMessage(getString(R.string.no_wifi));
                 dialog = builder.create();
                 dialog.show();
             } else {
@@ -205,11 +205,11 @@ public class WifiSettingActivity extends BaseActivity {
             public void run() {
                 IPList.append("IP: " + result.getInetAddress().getHostAddress() + "\n");
                 txt_notify.setText(IPList.toString());
-                btn_ok.setText("配置完成");
+                btn_ok.setText(getString(R.string.config_success));
                 btn_ok.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Toast.makeText(WifiSettingActivity.this, "配置完成", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(WifiSettingActivity.this, getString(R.string.config_success), Toast.LENGTH_SHORT).show();
                         mProgressDialog.dismiss();
                         if (mEsptouchTask != null) {
                             mEsptouchTask.interrupt();
@@ -231,7 +231,7 @@ public class WifiSettingActivity extends BaseActivity {
                     }
                     isFirst = false;
                 }
-                Toast.makeText(WifiSettingActivity.this, "有新设备连接", Toast.LENGTH_LONG).show();
+                Toast.makeText(WifiSettingActivity.this, getString(R.string.have_new_device_connect), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -302,7 +302,7 @@ public class WifiSettingActivity extends BaseActivity {
                     }
                 }
             });
-            btn_ok.setText("取  消");
+            btn_ok.setText(getString(R.string.cancel));
             btn_ok.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -345,23 +345,21 @@ public class WifiSettingActivity extends BaseActivity {
                 if (firstResult.isSuc()) {
                     StringBuilder sb = new StringBuilder();
                     for (IEsptouchResult resultInList : result) {
-                        sb.append("IP: " + resultInList.getInetAddress()
-                                .getHostAddress() + "\n");
+                        sb.append("IP: " + resultInList.getInetAddress().getHostAddress() + "\n");
                     }
                     Log.v("test", "config success ！！！");
-
-                    btn_ok.setText("配置完成");
+                    btn_ok.setText(getString(R.string.config_success));
                     btn_ok.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Toast.makeText(WifiSettingActivity.this, "配置完成", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(WifiSettingActivity.this, getString(R.string.config_success), Toast.LENGTH_SHORT).show();
                             mProgressDialog.dismiss();
                         }
                     });
                     txt_notify.setText(sb.toString());
                 } else {
-                    btn_ok.setText("确认");
-                    txt_notify.setText("配置超时，请重启设备再次配置");
+                    btn_ok.setText(getString(R.string.sure));
+                    txt_notify.setText(getString(R.string.config_timeout));
                 }
             }
         }

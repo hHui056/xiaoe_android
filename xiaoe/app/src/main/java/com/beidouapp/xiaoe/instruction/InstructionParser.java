@@ -28,10 +28,8 @@ public class InstructionParser {
             Log.e(TAG, "content is null");
             return null;
         }
-
         // 校验header -> 校验length -> 校验bcc ->
         // 解析cmd -> 解析type -> 解析seq -> 解析data
-
         Instruction instruction = new Instruction();
         // verify header
         if (content[0] != (byte) 0xFF || content[1] != (byte) 0xFF) {
@@ -116,23 +114,23 @@ public class InstructionParser {
                 break;
             case Instruction.Cmd.CONTROL_BACK://控制报文回复
                 if (data[0] == Instruction.DATA0.RGB) {//RGB控制反馈
-                    if (data[1]==0x00){
+                    if (data[1] == 0x00) {
                         body = new RGBControllerResBody();
                         body.parseContent(data);
                         instruction.body = body;
                         body.setIsAvailable(true);
-                    }else{
+                    } else {
                         Log.w(TAG, "发送报文不正确" + data[1]);
                     }
                 } else if (data[0] == Instruction.DATA0.LED) {//LED控制反馈
-                       if (data[1]==0x00){
-                           body = new LEDControllerResBody();
-                           body.parseContent(data);
-                           instruction.body = body;
-                           body.setIsAvailable(true);
-                       }else{
-                           Log.w(TAG, "发送报文不正确" + data[1]);
-                       }
+                    if (data[1] == 0x00) {
+                        body = new LEDControllerResBody();
+                        body.parseContent(data);
+                        instruction.body = body;
+                        body.setIsAvailable(true);
+                    } else {
+                        Log.w(TAG, "发送报文不正确" + data[1]);
+                    }
                 }
                 break;
         }

@@ -27,6 +27,10 @@ public class Constans {
     public static final String TEST_UID = "Fc5wGsTuvumvyVvyM3mKeYJrkryaUF6NXj";
 
     public static final String TEST_DEVICE_UID = "Fc5wGsTuvumomVom5De2G4rEqLZHCb1iiC";
+    /**
+     * 讯飞语音识别appid  每天有500次语音识别上限
+     */
+    public static final String XUNFEI_APPID = "=593f514e";
 
     /**
      * BroadcastReceiver action

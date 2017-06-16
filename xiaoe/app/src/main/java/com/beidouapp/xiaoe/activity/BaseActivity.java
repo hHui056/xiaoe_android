@@ -14,6 +14,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 public class BaseActivity extends Activity {
     SweetAlertDialog sweetProgressDialog = null;
+
     SweetAlertDialog sweetAlertDialog = null;
 
     @Override
