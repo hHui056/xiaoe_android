@@ -1,14 +1,11 @@
 package com.beidouapp.xiaoe.activity;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.KeyEvent;
 import android.view.View;
@@ -16,12 +13,10 @@ import android.widget.Button;
 
 import com.beidouapp.et.ErrorInfo;
 import com.beidouapp.et.IActionListener;
-import com.beidouapp.et.ISDKContext;
 import com.beidouapp.et.Message;
 import com.beidouapp.xiaoe.R;
 import com.beidouapp.xiaoe.instruction.Instruction;
 import com.beidouapp.xiaoe.instruction.RGBControllerReqBody;
-import com.beidouapp.xiaoe.service.IMService;
 import com.beidouapp.xiaoe.utils.Constans;
 import com.beidouapp.xiaoe.utils.TestUtil;
 import com.github.mikephil.charting.animation.Easing;
@@ -45,21 +40,7 @@ import java.util.ArrayList;
 public class RGBControllerActivity extends BaseActivity implements OnChartValueSelectedListener, View.OnClickListener {
     PieChart pieLight;
     Button btnBackToFirstpage;
-    Intent intentService;
-    ISDKContext sdkContext;
     MyBroadcastReceiver rec;
-    private IMService.MyBinder mBinder;
-    private ServiceConnection connection = new ServiceConnection() {
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-        }
-
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            mBinder = (IMService.MyBinder) service;
-            sdkContext = mBinder.getSdkContext();
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +48,6 @@ public class RGBControllerActivity extends BaseActivity implements OnChartValueS
         setContentView(R.layout.activity_rgbcontroller);
 
         initPieChart();
-        bindService();
         registBroadcase();
     }
 
@@ -128,8 +108,8 @@ public class RGBControllerActivity extends BaseActivity implements OnChartValueS
     }
 
     @Override
-    public void onNothingSelected() {//未选中任何一项
-        TestUtil.showTest("未选中任何一项");
+    public void onNothingSelected() {//未选中任何一项--->关灯
+        controlLight(12);
     }
 
     /**
@@ -141,7 +121,7 @@ public class RGBControllerActivity extends BaseActivity implements OnChartValueS
         Instruction instruction = new Instruction.Builder().setCmd(Instruction.Cmd.CONTROL).setBody(new RGBControllerReqBody(index)).createInstruction();
         Message message = new Message();
         message.setPayload(instruction.toByteArray());
-        sdkContext.chatTo(Constans.TEST_DEVICE_UID, message, new IActionListener() {
+        isdkContext.chatTo(DEVICE_UID, message, new IActionListener() {
             @Override
             public void onSuccess() {
                 TestUtil.showTest("控制RGB成功");
@@ -154,13 +134,6 @@ public class RGBControllerActivity extends BaseActivity implements OnChartValueS
         });
     }
 
-    /**
-     * 绑定service
-     */
-    void bindService() {
-        intentService = new Intent(this.getApplicationContext(), IMService.class);
-        bindService(intentService, connection, Context.BIND_AUTO_CREATE);
-    }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -180,7 +153,6 @@ public class RGBControllerActivity extends BaseActivity implements OnChartValueS
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(connection);
         LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(rec);
     }
 

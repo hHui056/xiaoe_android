@@ -24,9 +24,12 @@ import com.beidouapp.et.Message;
 import com.beidouapp.et.StatusListener;
 import com.beidouapp.xiaoe.activity.BaseActivity;
 import com.beidouapp.xiaoe.activity.CaptureActivity;
+import com.beidouapp.xiaoe.activity.DataTransmissionActivity;
+import com.beidouapp.xiaoe.activity.GroupManageActivity;
 import com.beidouapp.xiaoe.activity.RGBControllerActivity;
 import com.beidouapp.xiaoe.activity.VisualInteractiveActivity;
 import com.beidouapp.xiaoe.activity.VoiceControlActivity;
+import com.beidouapp.xiaoe.activity.VoiceSendActivity;
 import com.beidouapp.xiaoe.activity.WifiSettingActivity;
 import com.beidouapp.xiaoe.instruction.AirReqBody;
 import com.beidouapp.xiaoe.instruction.AirResBody;
@@ -43,6 +46,7 @@ import com.beidouapp.xiaoe.view.OptionView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class MainActivity extends BaseActivity {
     public static final String TAG = "MainActivity ";
@@ -76,6 +80,10 @@ public class MainActivity extends BaseActivity {
      * 是否处理错误消息
      */
     boolean isShowErrorMessage = true;
+    /**
+     * 输入透传板Uid对话框
+     */
+    SweetAlertDialog InputUidDialog = null;
     /**
      * 设备是否在线
      */
@@ -122,8 +130,10 @@ public class MainActivity extends BaseActivity {
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            TestUtil.showTest("MainActivity 绑定IMservice");
             mBinder = (IMService.MyBinder) service;
             sdkContext = mBinder.getSdkContext();
+            isdkContext = sdkContext;
 
         }
     };
@@ -191,7 +201,9 @@ public class MainActivity extends BaseActivity {
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
             case R.id.img_device:
-                startActivity(new Intent(MainActivity.this, CaptureActivity.class));
+                Where_From = "MainActivity";
+                Intent intent = new Intent(MainActivity.this, CaptureActivity.class);
+                startActivity(intent);
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
             case R.id.opt_wenshidu:
@@ -201,28 +213,70 @@ public class MainActivity extends BaseActivity {
                 QureyAir();
                 break;
             case R.id.opt_yuyinkongzhi:
+                if (!isConnectServer) {
+                    showErrorMessage(getString(R.string.server_not_connected));
+                    return;
+                }
+                if (!isDeviceOnline) {
+                    showErrorMessage(getString(R.string.device_not_online));
+                    return;
+                }
                 isShowErrorMessage = false;
                 startActivity(new Intent(MainActivity.this, VoiceControlActivity.class));
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
             case R.id.opt_qunzuguanli:
-                showToast("群组管理");
+                if (!isConnectServer) {
+                    showErrorMessage(getString(R.string.server_not_connected));
+                    return;
+                }
+                if (!isDeviceOnline) {
+                    showErrorMessage(getString(R.string.device_not_online));
+                    return;
+                }
+                startActivity(new Intent(MainActivity.this, GroupManageActivity.class));
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
             case R.id.opt_keshijiaohu:
+                if (!isConnectServer) {
+                    showErrorMessage(getString(R.string.server_not_connected));
+                    return;
+                }
+                if (!isDeviceOnline) {
+                    showErrorMessage(getString(R.string.device_not_online));
+                    return;
+                }
                 isShowErrorMessage = false;
                 startActivity(new Intent(MainActivity.this, VisualInteractiveActivity.class));
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
             case R.id.opt_duocaidengguang:
+                if (!isConnectServer) {
+                    showErrorMessage(getString(R.string.server_not_connected));
+                    return;
+                }
+                if (!isDeviceOnline) {
+                    showErrorMessage(getString(R.string.device_not_online));
+                    return;
+                }
                 isShowErrorMessage = false;
                 startActivity(new Intent(MainActivity.this, RGBControllerActivity.class));
                 overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
             case R.id.opt_yuyinliuyan:
-                showToast("语音留言");
+                if (!isConnectServer) {
+                    showErrorMessage(getString(R.string.server_not_connected));
+                    return;
+                }
+                if (!isDeviceOnline) {
+                    showErrorMessage(getString(R.string.device_not_online));
+                    return;
+                }
+                startActivity(new Intent(MainActivity.this, VoiceSendActivity.class));
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 break;
             case R.id.opt_shujutouchuan:
-                showToast("数据透传");
+                showInputUidDialog();
                 break;
         }
     }
@@ -274,7 +328,7 @@ public class MainActivity extends BaseActivity {
         TempQureyType = QureyType.QUREYING;
         TestUtil.showTest("-------------①-------------");
         TestUtil.showTest("------------" + sdkContext + "----------");
-        sdkContext.chatTo(Constans.TEST_DEVICE_UID, message, new IActionListener() {
+        sdkContext.chatTo(DEVICE_UID, message, new IActionListener() {
             @Override
             public void onSuccess() {
                 TestUtil.showTest(TAG + "温湿度指令发送成功");
@@ -308,7 +362,7 @@ public class MainActivity extends BaseActivity {
         message.setPayload(instruction.toByteArray());
         ShowProgressDialog();
         AirQureyType = QureyType.QUREYING;
-        sdkContext.chatTo(Constans.TEST_DEVICE_UID, message, new IActionListener() {
+        sdkContext.chatTo(DEVICE_UID, message, new IActionListener() {
             @Override
             public void onSuccess() {
                 TestUtil.showTest(TAG + "大气压指令发送成功");
@@ -347,7 +401,6 @@ public class MainActivity extends BaseActivity {
         }).start();
     }
 
-
     /**
      * 10s 过后检查是否有查詢回复
      */
@@ -377,7 +430,7 @@ public class MainActivity extends BaseActivity {
      * 获取设备在线状态
      */
     private void getDeviceStates() {
-        sdkContext.getUserState(Constans.TEST_DEVICE_UID, new StatusListener() {
+        sdkContext.getUserState(DEVICE_UID, new StatusListener() {
             @Override
             public void onSuccess(String s, int code) {
                 if (code == 1) {
@@ -416,6 +469,33 @@ public class MainActivity extends BaseActivity {
         super.onDestroy();
         unbindService(connection);
         LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(rec);
+    }
+
+    /**
+     * 显示输入uid对话框
+     */
+    void showInputUidDialog() {
+        InputUidDialog = new SweetAlertDialog(MainActivity.this);
+        InputUidDialog.show();
+        InputUidDialog.showCancelButton(true);
+        InputUidDialog.showEditText(true);
+        InputUidDialog.setEditTextString(DEVICE_UID);
+
+        InputUidDialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+            @Override
+            public void onClick(SweetAlertDialog sweetAlertDialog) {
+                String uid = InputUidDialog.getEditUid();
+                if (uid == null || uid.equals("") || uid.length() != 34) {
+                    showToast(getString(R.string.must_input_uid));
+                    return;
+                }
+                Intent intent = new Intent(MainActivity.this, DataTransmissionActivity.class);
+                intent.putExtra(Constans.Key.UID_KEY, uid);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                InputUidDialog.dismiss();
+            }
+        });
     }
 
     private class MyBroadcastReceiver extends BroadcastReceiver {

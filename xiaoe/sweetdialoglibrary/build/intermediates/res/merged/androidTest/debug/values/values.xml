@@ -227,7 +227,7 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="app_name">SweetAlertDialog</string>
-    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_cancel">取 消</string>
     <string name="dialog_default_title">Here\'s a message!</string>
     <string name="dialog_ok">确 认</string>
     <style name="Base.TextAppearance.AppCompat" parent="android:TextAppearance">

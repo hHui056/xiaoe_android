@@ -51,7 +51,10 @@
             android:theme="@style/transcutestyle" />
         <activity android:name=".activity.VisualInteractiveActivity" />
         <activity android:name=".activity.VoiceControlActivity" />
-        <activity android:name=".activity.GroupManageActivity"></activity>
+        <activity android:name=".activity.GroupManageActivity" />
+        <activity android:name=".activity.VoiceSendActivity" />
+        <activity android:name=".activity.FirstUseActivity" />
+        <activity android:name=".activity.DataTransmissionActivity"></activity>
     </application>
 
 </manifest>

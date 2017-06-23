@@ -1,9 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.beidouapp.xiaoe.activity.GroupManageActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="18.75"
+        android:background="@color/title_background"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true">
+
+        <com.beidouapp.xiaoe.view.MyTitle
+            android:id="@+id/title_qunzuguanli"
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+
+        </com.beidouapp.xiaoe.view.MyTitle>
+
+        <ImageView
+            android:id="@+id/img_xxx"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_below="@+id/title_qunzuguanli"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="18dp"
+            android:src="@drawable/qunzuguanli" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_xxx"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/add_group"
+            android:textColor="@android:color/white" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="47.12"
+        android:background="@android:color/white">
+
+        <EditText
+            android:id="@+id/edit_group_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@android:color/white"
+            android:hint="@string/edit_group_name"
+            android:padding="15dp"
+            android:textSize="15sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/edit_group_name"
+            android:background="@color/group_members_background">
+
+            <TextView
+                android:id="@+id/txt_add_group_member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="10dp"
+                android:text="添加群成员"
+                android:textColor="#CCCDCD"
+                android:textSize="15sp" />
+
+            <GridView
+                android:id="@+id/grid_group_members"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/view_slide"
+                android:layout_below="@+id/txt_add_group_member"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="10dp"
+                android:divider="#00000000"
+                android:dividerHeight="0dip"
+                android:horizontalSpacing="15dp"
+                android:numColumns="4"
+                android:scrollbars="none"
+                android:verticalSpacing="15dp">
+
+
+            </GridView>
+
+            <View
+                android:id="@+id/view_slide"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_above="@+id/btn_sure_group"
+                android:background="@android:color/darker_gray">
+
+            </View>
+
+            <Button
+                android:id="@+id/btn_sure_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/white"
+                android:padding="10dp"
+                android:text="完 成"
+                android:textColor="@color/title_background"
+                android:textSize="23sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

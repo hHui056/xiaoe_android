@@ -11,6 +11,8 @@
     <string name="yuyinliuyan">语音留言</string>
     <string name="yuyinliuyan_describe">通过APP向设备发送语音留言</string>
     <string name="qunzuguanli">群组管理</string>
+    <string name="add_member">添加成员</string>
+    <string name="add_group">添加群组</string>
     <string name="qunzuguanli_describe">添加和管理多个设备</string>
     <string name="shujutouchuan">数据透传</string>
     <string name="shujutouchuan_describe">通过APP向设备发数据请用透传板体验此功能</string>
@@ -20,6 +22,7 @@
     <string name="led_control_success">LED控制成功</string>
     <string name="control_faild">控制失败</string>
     <string name="only_chinese">只能输入中文</string>
+    <string name="must_input">请输入要发送的内容</string>
     <string name="order_wrong">指令无法识别</string>
     <string name="network_wrong">连接失败,请检查网络</string>
     <string name="connect_success">连接成功</string>
@@ -35,8 +38,23 @@
     <string name="config_success">配置完成</string>
     <string name="have_new_device_connect">有新设备连接</string>
     <string name="sure">确认</string>
+    <string name="sure_add">确定添加</string>
     <string name="cancel">取  消</string>
     <string name="passwrod_toolong">wifi密码超长</string>
     <string name="config_timeout">配置超时，请重启设备再次配置</string>
     <string name="light_control_success">灯光控制成功</string>
+    <string name="edit_group_name">点击编辑群名称</string>
+    <string name="register_fail">注册失败，请检查网络情况！</string>
+    <string name="input_null">请先输入群名称</string>
+    <string name="create_group_fail">群创建失败</string>
+    <string name="create_group_success">群创建成功</string>
+    <string name="member_is_add">成员已添加</string>
+    <string name="add_member_fail">添加成员失败</string>
+    <string name="no_group_members">请先添加群成员</string>
+    <string name="sure_delete_member">确定移除此成员？</string>
+    <string name="delete_member_fail">移除成员失败</string>
+    <string name="delete_member_success">移除成员成功</string>
+    <string name="msg_send_faild">消息发送失败</string>
+    <string name="must_input_uid">请输入正确的透传版UID</string>
+    <string name="bind_step">1.确认手机已经连上WiFi\n\n2.点击"配置WiFi"，配置设备上网\n\n3.请长按开发板上的WiFi配置键，知道液晶屏显示"网络配置中"时放开按键\n\n4.点击"绑定设备",连接设备</string>
 </resources>

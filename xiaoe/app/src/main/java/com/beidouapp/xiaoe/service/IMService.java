@@ -21,6 +21,7 @@ import com.beidouapp.et.SDKContextManager;
 import com.beidouapp.et.SDKContextParameters;
 import com.beidouapp.et.Server;
 import com.beidouapp.et.client.domain.DocumentInfo;
+import com.beidouapp.xiaoe.activity.BaseActivity;
 import com.beidouapp.xiaoe.instruction.Instruction;
 import com.beidouapp.xiaoe.instruction.InstructionParser;
 import com.beidouapp.xiaoe.utils.ConnectType;
@@ -91,7 +92,7 @@ public class IMService extends Service {
         sdkContextParameters.setSecretKey(Constans.SECRETKEY);
         sdkContextParameters.setBlanceServerPort(Constans.SERVER_PORT);
         // sdkContextParameters.setUid(userId);
-        sdkContextParameters.setUid(Constans.TEST_UID);
+        sdkContextParameters.setUid(BaseActivity.MY_UID);
         sdkContext = SDKContextManager.createContext(sdkContextParameters, this);
         sdkContext.setCallback(setContextCallback());
         discoverSvrs();
@@ -114,7 +115,7 @@ public class IMService extends Service {
             public void onPeerState(String uid, String code) {
                 showLog(String.format("%s   %s", uid, code));
                 // 用户状态改变
-                if (uid.equals(Constans.TEST_DEVICE_UID)) {//绑定的用户状态改变才通知用户
+                if (uid.equals(BaseActivity.DEVICE_UID)) {//绑定的用户状态改变才通知用户
                     Intent intent = new Intent();
                     intent.setAction(Constans.DEVICE_STATE_CHANGE);
                     intent.putExtra(Constans.DEVICE_STATE_KEY, code);
@@ -124,7 +125,13 @@ public class IMService extends Service {
 
             @Override
             public void onMessage(MessageType type, String topic, Message message) {
-                if (type == MessageType.CHAT_TO && topic.equals(Constans.TEST_DEVICE_UID)) {
+                Intent intent1 = new Intent();
+                intent1.setAction(Constans.RECEIVE_TRANSMISSION);
+                intent1.putExtra(Constans.Key.TOPIC_KEY, topic);
+                intent1.putExtra(Constans.ILINK_MSG_KEY, new String(message.getPayload()));
+                LocalBroadcastManager.getInstance(IMService.this).sendBroadcast(intent1);
+
+                if (type == MessageType.CHAT_TO && topic.equals(BaseActivity.DEVICE_UID)) {
                     Instruction instruction = new InstructionParser().parseInstruction(message.getPayload());
                     if (instruction != null) {
                         Log.i(TAG, "指令解析正确");
@@ -185,9 +192,10 @@ public class IMService extends Service {
      * @param svr
      */
     public void connectSvrs(final Server svr) {
+        TestUtil.showTest("server IP is " + svr.getIp());
         ConnectOptions connectOptions = new ConnectOptions(); // 连接参数
-        connectOptions.setConnectionTimeout(5); // 连接超时时间
-        connectOptions.setKeepAliveInterval((short) 10); // 与服务器的保活时间间隔
+        connectOptions.setConnectionTimeout(10); // 连接超时时间
+        connectOptions.setKeepAliveInterval((short) 15); // 与服务器的保活时间间隔
         connectOptions.setCleanSession(true);//清除离线消息
         // svr为discover发现到的可用服务器
         sdkContext.connect(svr, connectOptions, new IActionListener() {

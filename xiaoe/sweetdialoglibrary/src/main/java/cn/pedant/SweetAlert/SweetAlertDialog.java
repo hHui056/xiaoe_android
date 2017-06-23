@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.Transformation;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,6 +57,8 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
     private ImageView mCustomImage;
     private Button mConfirmButton;
     private Button mCancelButton;
+    private EditText edit_touchuan_uid;
+    private View view_slide;
     private ProgressHelper mProgressHelper;
     private FrameLayout mWarningFrame;
     private OnSweetClickListener mCancelClickListener;
@@ -147,7 +150,9 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         mCustomImage = (ImageView) findViewById(R.id.custom_image);
         mWarningFrame = (FrameLayout) findViewById(R.id.warning_frame);
         mConfirmButton = (Button) findViewById(R.id.confirm_button);
-        mCancelButton = (Button) findViewById(R.id.cancel_button);
+        mCancelButton = (Button) findViewById(R.id.btn_cancle);
+        edit_touchuan_uid = (EditText) findViewById(R.id.edit_touchuan_uid);
+        view_slide = (View) findViewById(R.id.view_slide);
         mProgressHelper.setProgressWheel((ProgressWheel) findViewById(R.id.progressWheel));
         mConfirmButton.setOnClickListener(this);
         mCancelButton.setOnClickListener(this);
@@ -158,6 +163,35 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         setConfirmText(mConfirmText);
         changeAlertType(mAlertType, true);
 
+    }
+
+    /**
+     * 获取输入内容
+     *
+     * @return
+     */
+    public String getEditUid() {
+        return edit_touchuan_uid.getText().toString().trim();
+    }
+
+    /**
+     * 设置edittext显示内容
+     *
+     * @param uid
+     */
+    public void setEditTextString(String uid) {
+        edit_touchuan_uid.setText(uid);
+    }
+
+    /**
+     * 是否显示输入框
+     *
+     * @param isShow
+     * @return
+     */
+    public SweetAlertDialog showEditText(boolean isShow) {
+        edit_touchuan_uid.setVisibility(isShow ? View.VISIBLE : View.GONE);
+        return this;
     }
 
     private void restore() {
@@ -276,6 +310,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
         mShowCancel = isShow;
         if (mCancelButton != null) {
             mCancelButton.setVisibility(mShowCancel ? View.VISIBLE : View.GONE);
+            view_slide.setVisibility(mShowCancel ? View.VISIBLE : View.GONE);
         }
         return this;
     }
@@ -355,7 +390,7 @@ public class SweetAlertDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.cancel_button) {
+        if (v.getId() == R.id.btn_cancle) {
             if (mCancelClickListener != null) {
                 mCancelClickListener.onClick(SweetAlertDialog.this);
             } else {

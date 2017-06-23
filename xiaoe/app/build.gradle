@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "com.beidouapp.xiaoe"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 1
         versionName "0.0.1"
@@ -25,17 +25,18 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(path: ':sweetdialoglibrary')
     compile project(path: ':MPChartLib')
     compile project(path: ':mylibrary')
+    //   compile project(path: ':asdk')
     compile files('libs/core-3.3.0.jar')
     compile files('libs/iLink-asdk-release-4.0.1.0.jar')
     compile files('libs/afinal_0.5.1_bin.jar')
     compile files('libs/Msc.jar')
+    compile files('libs/Sunflower.jar')
     compile 'com.jakewharton:butterknife:8.6.0'
     compile 'com.android.support:appcompat-v7:25.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

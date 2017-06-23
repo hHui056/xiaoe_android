@@ -1,10 +1,16 @@
 package com.beidouapp.xiaoe.activity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.WindowManager;
+
+import com.beidouapp.et.ISDKContext;
+import com.beidouapp.xiaoe.utils.Constans;
+import com.beidouapp.xiaoe.utils.TestUtil;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
@@ -13,18 +19,45 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  * @author hHui
  */
 public class BaseActivity extends Activity {
+    /**
+     * 我的UID
+     */
+    public static String MY_UID = "";
+    /**
+     * 设备UID
+     */
+    public static String DEVICE_UID = "";
+    public static ISDKContext isdkContext = null;
+    public static String Where_From = "MainActivity";
+    public SharedPreferences sp = null;
+    /**
+     * 加载dialog
+     */
     SweetAlertDialog sweetProgressDialog = null;
-
+    /**
+     * 警告框
+     */
     SweetAlertDialog sweetAlertDialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TestUtil.showTest("BaseActivity oncreate");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //透明状态栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //透明导航栏
             //  getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+        sp = getSharedPreferences(Constans.SHARE_PREFERENCE, Context.MODE_PRIVATE);
+        if (MY_UID.equals("")) {
+            MY_UID = sp.getString(Constans.Key.UID_KEY, "");
+            // MY_UID = "Fc5wGsTuvumvyVvyM3mKeYJrkryaUF6NXj";
+        }
+
+        if (DEVICE_UID.equals("")) {
+            DEVICE_UID = sp.getString(Constans.Key.DEVICE_UID_KEY, "");
+            //DEVICE_UID = "Fc5wGsTuvumomVom5De2G4rEqLZHCb1iiC";
         }
     }
 

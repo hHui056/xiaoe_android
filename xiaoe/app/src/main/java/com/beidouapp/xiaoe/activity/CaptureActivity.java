@@ -15,6 +15,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beidouapp.xiaoe.R;
@@ -52,6 +53,7 @@ public class CaptureActivity extends BaseActivity implements Callback {
             mediaPlayer.seekTo(0);
         }
     };
+    TextView txt_saomiao;
     private CaptureActivityHandler handler;
     private ViewfinderView viewfinderView;
     private boolean hasSurface;
@@ -69,22 +71,23 @@ public class CaptureActivity extends BaseActivity implements Callback {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
         this.setContentView(R.layout.camera);
-
-        // ViewUtil.addTopView(getApplicationContext(), this,
-        // R.string.scan_card);
         CameraManager.init(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
         cancelScanButton = (Button) this.findViewById(R.id.btn_cancel_scan);
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
-
         findViewById(R.id.img_google_back).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        txt_saomiao = (TextView) findViewById(R.id.txt_saomiao);
+        if (Where_From.equals("GroupManageActivity")) {
+            txt_saomiao.setText(getString(R.string.add_member));
+        }
     }
 
     @Override
@@ -158,11 +161,19 @@ public class CaptureActivity extends BaseActivity implements Callback {
                 String uid = obj.optString("uid");
                 if (appkey != null && !appkey.equals("") && uid != null && !uid.equals("")) {//扫描的appkey和uid信息不为空
                     if (appkey.length() == 20 && uid.length() == 34) {//有效的20位appkey，34位uid
-                        Intent resultIntent = new Intent(CaptureActivity.this, QRSuccessActivity.class);
-                        resultIntent.putExtra(Constans.Key.SCAN_APPKEY, appkey);
-                        resultIntent.putExtra(Constans.Key.SCAN_UID, uid);
-                        startActivity(resultIntent);
-                        CaptureActivity.this.finish();
+                        if (Where_From.equals("GroupManageActivity")) {
+                            Intent resultIntent = new Intent(CaptureActivity.this, QRSuccessActivity.class);
+                            resultIntent.putExtra(Constans.Key.SCAN_APPKEY, appkey);
+                            resultIntent.putExtra(Constans.Key.SCAN_UID, uid);
+                            startActivityForResult(resultIntent, Constans.CODE_2);
+                        } else {
+                            Intent resultIntent = new Intent(CaptureActivity.this, QRSuccessActivity.class);
+                            resultIntent.putExtra(Constans.Key.SCAN_APPKEY, appkey);
+                            resultIntent.putExtra(Constans.Key.SCAN_UID, uid);
+                            startActivity(resultIntent);
+                            CaptureActivity.this.finish();
+                        }
+
                     } else {
                         showErrorMessage("请扫描开发板背面的二维码");
                     }
@@ -176,6 +187,16 @@ public class CaptureActivity extends BaseActivity implements Callback {
 
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        TestUtil.showTest("onactivityresult CaptureActivity");
+        if (requestCode == Constans.CODE_2 && resultCode == Constans.CODE_3 && data != null) {
+            setResult(Constans.CODE_4, data);
+            finish();
+        }
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {

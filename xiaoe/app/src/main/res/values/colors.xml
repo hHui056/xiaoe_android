@@ -9,4 +9,6 @@
     <color name="viewfinder_frame">#ff000000</color>
     <color name="viewfinder_laser">#ffff0000</color>
     <color name="possible_result_points">#c0ffff00</color>
+    <color name="group_members_background">#F8F9F9</color>
+
 </resources>

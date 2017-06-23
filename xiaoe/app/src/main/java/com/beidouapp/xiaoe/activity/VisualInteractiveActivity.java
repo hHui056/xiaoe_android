@@ -1,13 +1,10 @@
 package com.beidouapp.xiaoe.activity;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -19,7 +16,6 @@ import android.widget.Toast;
 
 import com.beidouapp.et.ErrorInfo;
 import com.beidouapp.et.IActionListener;
-import com.beidouapp.et.ISDKContext;
 import com.beidouapp.et.Message;
 import com.beidouapp.xiaoe.R;
 import com.beidouapp.xiaoe.adapter.ShowMessageAdapter;
@@ -29,7 +25,6 @@ import com.beidouapp.xiaoe.instruction.Body;
 import com.beidouapp.xiaoe.instruction.Instruction;
 import com.beidouapp.xiaoe.instruction.LEDControllerReqBody;
 import com.beidouapp.xiaoe.instruction.LEDControllerResBody;
-import com.beidouapp.xiaoe.service.IMService;
 import com.beidouapp.xiaoe.utils.Constans;
 import com.beidouapp.xiaoe.view.MyTitle;
 
@@ -39,6 +34,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * @author hHui
+ *         <p>
+ *         可视交互
+ */
 public class VisualInteractiveActivity extends BaseActivity {
 
     @BindView(R.id.title_keshijiaohu)
@@ -52,9 +52,6 @@ public class VisualInteractiveActivity extends BaseActivity {
     @BindView(R.id.layout_send)
     LinearLayout layoutSend;
 
-    Intent intentService;
-
-    ISDKContext sdkContext;
 
     MyBroadcastReceiver rec;
 
@@ -64,19 +61,6 @@ public class VisualInteractiveActivity extends BaseActivity {
      */
     ArrayList<MessageItem> messageLists = new ArrayList<MessageItem>();
     ShowMessageAdapter adapter;
-    private IMService.MyBinder mBinder;
-    private ServiceConnection connection = new ServiceConnection() {
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-
-        }
-
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            mBinder = (IMService.MyBinder) service;
-            sdkContext = mBinder.getSdkContext();
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +71,6 @@ public class VisualInteractiveActivity extends BaseActivity {
 
 
         registBroadcase();
-        bindService();
     }
 
     /**
@@ -96,15 +79,6 @@ public class VisualInteractiveActivity extends BaseActivity {
     @OnClick(R.id.btn_send_message)
     public void onClick() {
         sendMessage(editMessageContent.getText().toString().trim());
-    }
-
-
-    /**
-     * 绑定service
-     */
-    void bindService() {
-        intentService = new Intent(this.getApplicationContext(), IMService.class);
-        bindService(intentService, connection, Context.BIND_AUTO_CREATE);
     }
 
     /**
@@ -122,7 +96,6 @@ public class VisualInteractiveActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(connection);
         LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(rec);
     }
 
@@ -142,11 +115,11 @@ public class VisualInteractiveActivity extends BaseActivity {
      */
     public void sendMessage(final String data) {
         closeKeyboard();
-         if (!isChinese(data)){
-             showErrorMessage(getResources().getString(R.string.only_chinese));
-             editMessageContent.setText("");
-             return;
-         }
+        if (!isChinese(data)) {
+            showErrorMessage(getResources().getString(R.string.only_chinese));
+            editMessageContent.setText("");
+            return;
+        }
         Instruction instruction = new Instruction.Builder().setCmd(Instruction.Cmd.CONTROL).setBody(new LEDControllerReqBody(data))
                 .createInstruction();
         Message message = new Message();
@@ -165,7 +138,7 @@ public class VisualInteractiveActivity extends BaseActivity {
         editMessageContent.setText("");
         /** ---------------------------  **/
 
-        sdkContext.chatTo(Constans.TEST_DEVICE_UID, message, new IActionListener() {
+        isdkContext.chatTo(DEVICE_UID, message, new IActionListener() {
             @Override
             public void onSuccess() {
             }

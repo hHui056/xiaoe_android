@@ -9,6 +9,20 @@
     android:gravity="center"
     android:orientation="vertical">
 
+    <EditText
+        android:id="@+id/edit_touchuan_uid"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/hhinputt"
+        android:hint="输入透传版UID"
+        android:padding="8dp"
+        android:singleLine="true"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
     <ImageView
         android:id="@+id/custom_image"
         android:layout_width="53dp"
@@ -147,13 +161,6 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <Button
-            android:id="@+id/cancel_button"
-            style="@style/dialog_blue_button"
-            android:layout_marginRight="10dp"
-            android:background="@drawable/gray_button_background"
-            android:text="@string/dialog_cancel"
-            android:visibility="gone" />
 
         <View
             android:layout_width="match_parent"
@@ -162,15 +169,46 @@
 
         </View>
 
-        <Button
-            android:id="@+id/confirm_button"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:text="@string/dialog_ok"
-            android:textColor="@color/warning_stroke_color"
-            android:textSize="15sp" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/confirm_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/dialog_ok"
+                android:textColor="@color/warning_stroke_color"
+                android:textSize="15sp" />
+
+            <View
+                android:id="@+id/view_slide"
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/darker_gray"
+                android:visibility="gone">
+
+
+            </View>
+
+            <Button
+                android:id="@+id/btn_cancle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/dialog_cancel"
+                android:textColor="@color/warning_stroke_color"
+                android:textSize="15sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

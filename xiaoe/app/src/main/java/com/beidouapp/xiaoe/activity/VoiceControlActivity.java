@@ -1,15 +1,12 @@
 package com.beidouapp.xiaoe.activity;
 
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.IBinder;
 import android.support.v4.content.LocalBroadcastManager;
 import android.widget.Button;
 import android.widget.ListView;
@@ -17,7 +14,6 @@ import android.widget.Toast;
 
 import com.beidouapp.et.ErrorInfo;
 import com.beidouapp.et.IActionListener;
-import com.beidouapp.et.ISDKContext;
 import com.beidouapp.et.Message;
 import com.beidouapp.xiaoe.R;
 import com.beidouapp.xiaoe.adapter.ShowMessageAdapter;
@@ -31,7 +27,6 @@ import com.beidouapp.xiaoe.instruction.RGBControllerReqBody;
 import com.beidouapp.xiaoe.instruction.RGBControllerResBody;
 import com.beidouapp.xiaoe.instruction.TemperatureAndHumidityReqBody;
 import com.beidouapp.xiaoe.instruction.TemperatureAndHumidityResBody;
-import com.beidouapp.xiaoe.service.IMService;
 import com.beidouapp.xiaoe.utils.Constans;
 import com.beidouapp.xiaoe.utils.TestUtil;
 import com.beidouapp.xiaoe.view.MyTitle;
@@ -57,7 +52,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * 語音控制 && 语音留言
+ * 語音控制
  *
  * @author hHui
  */
@@ -95,14 +90,6 @@ public class VoiceControlActivity extends BaseActivity {
      */
     MyBroadcastReceiver rec;
     /**
-     * IMService
-     */
-    Intent intentService;
-    /**
-     * sdk实例
-     */
-    ISDKContext sdkContext;
-    /**
      * 语音识别结果
      */
     StringBuffer listenResult = new StringBuffer();
@@ -132,12 +119,9 @@ public class VoiceControlActivity extends BaseActivity {
                     e.printStackTrace();
                 }
             }
-
         }
     };
 
-
-    private IMService.MyBinder mBinder;
     private String recordPath = "";//当前录音路径
     /**
      * 存所有对话消息
@@ -179,18 +163,6 @@ public class VoiceControlActivity extends BaseActivity {
 
         }
     };
-    private ServiceConnection connection = new ServiceConnection() {
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            TestUtil.showTest("service 断开连接");
-        }
-
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            mBinder = (IMService.MyBinder) service;
-            sdkContext = mBinder.getSdkContext();
-        }
-    };
     /**
      * 初始化监听器。
      */
@@ -215,10 +187,8 @@ public class VoiceControlActivity extends BaseActivity {
         setContentView(R.layout.activity_voice_control);
         SpeechUtility.createUtility(this, SpeechConstant.APPID + Constans.XUNFEI_APPID);
         ButterKnife.bind(this);
-
         titleYuyinkongzhi.setTitle(getResources().getString(R.string.yuyinkongzhi));
         registBroadcase();
-        bindService();
         player = new MediaPlayer();
     }
 
@@ -234,18 +204,9 @@ public class VoiceControlActivity extends BaseActivity {
         LocalBroadcastManager.getInstance(getApplicationContext()).registerReceiver(rec, filter);
     }
 
-    /**
-     * 绑定service
-     */
-    void bindService() {
-        intentService = new Intent(this.getApplicationContext(), IMService.class);
-        bindService(intentService, connection, Context.BIND_AUTO_CREATE);
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbindService(connection);
         LocalBroadcastManager.getInstance(getApplicationContext()).unregisterReceiver(rec);
         if (player.isPlaying()) {
             player.stop();
@@ -269,10 +230,12 @@ public class VoiceControlActivity extends BaseActivity {
 
                 break;
             case CLOSE_LIGHT:
-                instruction = new Instruction.Builder().setCmd(Instruction.Cmd.CONTROL).setBody(new RGBControllerReqBody(12)).createInstruction();
+                instruction = new Instruction.Builder().setCmd(Instruction.Cmd.CONTROL).setBody(new RGBControllerReqBody(12))
+                        .createInstruction();
                 break;
             case OPEN_LIGHT:
-                instruction = new Instruction.Builder().setCmd(Instruction.Cmd.CONTROL).setBody(new RGBControllerReqBody(13)).createInstruction();
+                instruction = new Instruction.Builder().setCmd(Instruction.Cmd.CONTROL).setBody(new RGBControllerReqBody(13))
+                        .createInstruction();
                 break;
             default:
                 break;
@@ -286,7 +249,7 @@ public class VoiceControlActivity extends BaseActivity {
 
         Message message = new Message();
         message.setPayload(instruction.toByteArray());
-        sdkContext.chatTo(Constans.TEST_DEVICE_UID, message, new IActionListener() {
+        isdkContext.chatTo(DEVICE_UID, message, new IActionListener() {
             @Override
             public void onSuccess() {
 
