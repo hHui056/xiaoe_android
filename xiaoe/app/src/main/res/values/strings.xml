@@ -56,5 +56,7 @@
     <string name="delete_member_success">移除成员成功</string>
     <string name="msg_send_faild">消息发送失败</string>
     <string name="must_input_uid">请输入正确的透传版UID</string>
+    <string name="send_sound_success">留言成功</string>
+    <string name="send_sound_fail">留言失败</string>
     <string name="bind_step">1.确认手机已经连上WiFi\n\n2.点击"配置WiFi"，配置设备上网\n\n3.请长按开发板上的WiFi配置键，知道液晶屏显示"网络配置中"时放开按键\n\n4.点击"绑定设备",连接设备</string>
 </resources>

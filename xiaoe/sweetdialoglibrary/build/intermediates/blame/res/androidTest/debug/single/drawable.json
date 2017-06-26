@@ -56,12 +56,16 @@
         "source": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\red_button_background.xml"
     },
     {
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
         "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\error_center_x.xml",
         "source": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\error_center_x.xml"
     },
     {
-        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
-        "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\hhinputt.xml",
+        "source": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\bundles\\debug\\res\\drawable\\hhinputt.xml"
     },
     {
         "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\abc_item_background_holo_light.xml",

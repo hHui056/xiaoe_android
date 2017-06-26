@@ -4,6 +4,10 @@
         "source": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\src\\main\\res\\drawable\\error_circle.xml"
     },
     {
+        "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\debug\\drawable\\hhinputt.xml",
+        "source": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\src\\main\\res\\drawable\\hhinputt.xml"
+    },
+    {
         "merged": "F:\\xiaoe_android\\xiaoe\\sweetdialoglibrary\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_cab_background_internal_bg.xml",
         "source": "C:\\Users\\Admin\\.android\\build-cache\\d11b2fe61f2b85f2a254f77fcdf619cca1feb7f3\\output\\res\\drawable\\abc_cab_background_internal_bg.xml"
     },

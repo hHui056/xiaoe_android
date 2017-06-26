@@ -69,28 +69,6 @@ public class GroupManageActivity extends BaseActivity {
      * 群Id
      */
     private String groupId = "";
-    AdapterView.OnItemClickListener itemClick = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-            if (position == membersList.size()) {//点击最后一项添加群成员
-                Intent openCameraIntent = new Intent(GroupManageActivity.this, CaptureActivity.class);
-                Where_From = "GroupManageActivity";
-                startActivityForResult(openCameraIntent, Constans.CODE_1);
-            } else {
-                dialog = new SweetAlertDialog(GroupManageActivity.this);
-                dialog.setContentText(getString(R.string.sure_delete_member));
-                dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                    @Override
-                    public void onClick(SweetAlertDialog sweetAlertDialog) {
-                        removeGroupMember(position);
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-                dialog.showCancelButton(true);
-            }
-        }
-    };
     /**
      * 是否允许创建群组
      */
@@ -115,6 +93,28 @@ public class GroupManageActivity extends BaseActivity {
                     adapter.notifyDataSetChanged();
                 }
 
+            }
+        }
+    };
+    AdapterView.OnItemClickListener itemClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+            if (position == membersList.size()) {//点击最后一项添加群成员
+                Intent openCameraIntent = new Intent(GroupManageActivity.this, CaptureActivity.class);
+                Where_From = "GroupManageActivity";
+                startActivityForResult(openCameraIntent, Constans.CODE_1);
+            } else {
+                dialog = new SweetAlertDialog(GroupManageActivity.this);
+                dialog.setContentText(getString(R.string.sure_delete_member));
+                dialog.setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
+                    @Override
+                    public void onClick(SweetAlertDialog sweetAlertDialog) {
+                        removeGroupMember(position);
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+                dialog.showCancelButton(true);
             }
         }
     };
@@ -274,7 +274,13 @@ public class GroupManageActivity extends BaseActivity {
                     return;
                 }
             }
-            addGroupMember(uid);
+            if (!isCreateGroup) {
+                addGroupMember(uid);
+            } else {
+                membersList.add(uid);
+                handler.sendEmptyMessage(REFRESH_GROUP_MEMBERS);
+            }
+
         }
     }
 

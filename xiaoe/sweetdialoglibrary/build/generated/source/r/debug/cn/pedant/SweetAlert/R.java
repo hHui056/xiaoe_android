@@ -1461,12 +1461,13 @@ containing a value of this type.
         public static int error_center_x=0x7f020035;
         public static int error_circle=0x7f020036;
         public static int gray_button_background=0x7f020037;
-        public static int ic_launcher=0x7f020038;
-        public static int red_button_background=0x7f020039;
-        public static int success_bow=0x7f02003a;
-        public static int success_circle=0x7f02003b;
-        public static int warning_circle=0x7f02003c;
-        public static int warning_sigh=0x7f02003d;
+        public static int hhinputt=0x7f020038;
+        public static int ic_launcher=0x7f020039;
+        public static int red_button_background=0x7f02003a;
+        public static int success_bow=0x7f02003b;
+        public static int success_circle=0x7f02003c;
+        public static int warning_circle=0x7f02003d;
+        public static int warning_sigh=0x7f02003e;
     }
     public static final class id {
         public static int action_bar=0x7f0b0036;
