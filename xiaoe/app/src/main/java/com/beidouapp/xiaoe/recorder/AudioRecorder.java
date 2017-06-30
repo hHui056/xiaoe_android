@@ -20,9 +20,21 @@ public class AudioRecorder implements RecordStrategy {
      * 录音存放路径
      */
     private String fileFolder = Environment.getExternalStorageDirectory().getPath() + "/msc";
+    /**
+     * 录音
+     */
     private AudioRecord mRecorder;
+    /**
+     * 录音输出写入
+     */
     private DataOutputStream dos;
+    /**
+     * 录音
+     */
     private Thread recordThread;
+    /**
+     * 是否开始录制
+     */
     private boolean isStart = false;
     private int bufferSize;
     /**
@@ -65,6 +77,7 @@ public class AudioRecorder implements RecordStrategy {
         bufferSize = AudioRecord.getMinBufferSize(8000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
         mRecorder = new AudioRecord(MediaRecorder.AudioSource.MIC, 8000, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT, bufferSize);
     }
+
 
     public static AudioRecorder getInstance() {
         if (record == null) {

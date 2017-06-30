@@ -31,30 +31,60 @@
         android:supportsRtl="true"
         android:theme="@android:style/Theme.NoTitleBar"
         tools:replace="android:icon, android:theme">
-        <activity android:name=".MainActivity" />
-        <activity android:name=".activity.BaseActivity" />
-        <activity android:name=".activity.LoadingActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BaseActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".activity.LoadingActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.WifiSettingActivity" />
+        <activity
+            android:name=".activity.WifiSettingActivity"
+            android:screenOrientation="portrait" />
 
         <service android:name=".service.IMService" />
 
-        <activity android:name=".activity.QRSuccessActivity" />
-        <activity android:name=".activity.CaptureActivity" />
+        <activity
+            android:name=".activity.QRSuccessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.CaptureActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.RGBControllerActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/transcutestyle" />
-        <activity android:name=".activity.VisualInteractiveActivity" />
-        <activity android:name=".activity.VoiceControlActivity" />
-        <activity android:name=".activity.GroupManageActivity" />
-        <activity android:name=".activity.VoiceSendActivity" />
-        <activity android:name=".activity.FirstUseActivity" />
-        <activity android:name=".activity.DataTransmissionActivity"></activity>
+        <activity
+            android:name=".activity.VisualInteractiveActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.VoiceControlActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.GroupManageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.VoiceSendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FirstUseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DataTransmissionActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>
